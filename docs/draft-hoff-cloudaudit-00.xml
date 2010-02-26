@@ -86,27 +86,29 @@
 
   <middle>
     <section title="Problem Statement">
-      <t></t>
+      <t>CloudAudit is a HTTP based protocol that allows clients to audit
+      metadata relating to security by automated means.</t>
 
-      <section title="Level 2">
-        <t><list style="symbols">
-            <t></t>
-          </list></t>
+      <section title="Discovery">
+        <t>Clients can detect support for CloudAudit via a successful HTTP GET
+        for /.well-known/cloudaudit</t>
       </section>
 
-      <section title="Another Level 2">
-        <figure>
-          <preamble>preamble to the figure.</preamble>
+      <section title="Examples">
+        <t>This section shows a number of examples.</t>
 
-          <artwork><![CDATA[
-              
-        ASCII artwork goes here... 
+        <section title="new section">
+          <t></t>
 
-]]></artwork>
+          <figure>
+            <preamble>preamble to the figure.</preamble>
 
-          <postamble>As you can see, this figure doodled and
-          dawdled.</postamble>
-        </figure>
+            <artwork><![CDATA[GET /.well-known/cloudaudit/com/example/cloud HTTP/1.1]]></artwork>
+
+            <postamble>As you can see, this figure doodled and
+            dawdled.</postamble>
+          </figure>
+        </section>
       </section>
     </section>
 
@@ -129,6 +131,8 @@
   <back>
     <references title="Normative References">
       <?rfc include="reference.RFC.2119"?>
+
+      <?rfc include="reference.RFC.2616"?>
     </references>
 
     <references title="Informative References">

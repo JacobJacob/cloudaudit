@@ -76,17 +76,17 @@ Copyright Notice
 Table of Contents
 
    1.  Problem Statement . . . . . . . . . . . . . . . . . . . . . . . 3
-     1.1.  Level 2 . . . . . . . . . . . . . . . . . . . . . . . . . . 3
-     1.2.  Another Level 2 . . . . . . . . . . . . . . . . . . . . . . 3
+     1.1.  Discovery . . . . . . . . . . . . . . . . . . . . . . . . . 3
+     1.2.  Examples  . . . . . . . . . . . . . . . . . . . . . . . . . 3
+       1.2.1.  new section . . . . . . . . . . . . . . . . . . . . . . 3
    2.  IANA Considerations . . . . . . . . . . . . . . . . . . . . . . 3
    3.  Security Considerations . . . . . . . . . . . . . . . . . . . . 3
    4.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . 3
    5.  References  . . . . . . . . . . . . . . . . . . . . . . . . . . 3
      5.1.  Normative References  . . . . . . . . . . . . . . . . . . . 3
-     5.2.  Informative References  . . . . . . . . . . . . . . . . . . 3
-   Appendix A.  An Appendix  . . . . . . . . . . . . . . . . . . . . . 3
+     5.2.  Informative References  . . . . . . . . . . . . . . . . . . 4
+   Appendix A.  An Appendix  . . . . . . . . . . . . . . . . . . . . . 4
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . . 4
-
 
 
 
@@ -115,18 +115,22 @@ Internet-Draft                 CloudAudit                  February 2010
 
 1.  Problem Statement
 
-1.1.  Level 2
+   CloudAudit is a HTTP based protocol that allows clients to audit
+   metadata relating to security by automated means.
 
-   o
+1.1.  Discovery
 
-1.2.  Another Level 2
+   Clients can detect support for CloudAudit via a successful HTTP GET
+   for /.well-known/cloudaudit
+
+1.2.  Examples
+
+   This section shows a number of examples.
+
+1.2.1.  new section
 
    preamble to the figure.
-
-
-           ASCII artwork goes here...
-
-
+   GET /.well-known/cloudaudit/com/example/cloud HTTP/1.1
    As you can see, this figure doodled and dawdled.
 
 
@@ -151,13 +155,9 @@ Internet-Draft                 CloudAudit                  February 2010
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
 
-5.2.  Informative References
-
-   [InfRef]   "", 2004.
-
-
-Appendix A.  An Appendix
-
+   [RFC2616]  Fielding, R., Gettys, J., Mogul, J., Frystyk, H.,
+              Masinter, L., Leach, P., and T. Berners-Lee, "Hypertext
+              Transfer Protocol -- HTTP/1.1", RFC 2616, June 1999.
 
 
 
@@ -167,6 +167,14 @@ Appendix A.  An Appendix
 Hoff & Johnston          Expires August 30, 2010                [Page 3]
 
 Internet-Draft                 CloudAudit                  February 2010
+
+
+5.2.  Informative References
+
+   [InfRef]   "", 2004.
+
+
+Appendix A.  An Appendix
 
 
 Authors' Addresses
@@ -189,14 +197,6 @@ Authors' Addresses
 
    Phone: +41 44 668 1679
    Email: sjj@google.com
-
-
-
-
-
-
-
-
 
 
 
