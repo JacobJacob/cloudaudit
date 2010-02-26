@@ -112,6 +112,16 @@
       </section>
     </section>
 
+    <section title="Namespace">
+      <t>CloudAudit relies on the Domain Name System (DNS) to divide the
+      namespace.</t>
+    </section>
+
+    <section title="Digital Signatures">
+      <t>Digital signatures allow clients to verify the integrity of the
+      assertions (both first-party and third-party).</t>
+    </section>
+
     <section anchor="IANA" title="IANA Considerations">
       <t>This document makes no request of IANA.</t>
 
