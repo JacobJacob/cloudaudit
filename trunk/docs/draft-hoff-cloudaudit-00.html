@@ -207,9 +207,11 @@ rights and restrictions with respect to this document.</p>
 <a href="#anchor1">1.</a>&nbsp;
 Problem Statement<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor2">1.1.</a>&nbsp;
-Level 2<br />
+Discovery<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor3">1.2.</a>&nbsp;
-Another Level 2<br />
+Examples<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor4">1.2.1.</a>&nbsp;
+new section<br />
 <a href="#IANA">2.</a>&nbsp;
 IANA Considerations<br />
 <a href="#Security">3.</a>&nbsp;
@@ -222,7 +224,7 @@ References<br />
 Normative References<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#rfc.references2">5.2.</a>&nbsp;
 Informative References<br />
-<a href="#anchor6">Appendix&nbsp;A.</a>&nbsp;
+<a href="#anchor7">Appendix&nbsp;A.</a>&nbsp;
 An Appendix<br />
 <a href="#rfc.authors">&#167;</a>&nbsp;
 Authors' Addresses<br />
@@ -234,32 +236,35 @@ Authors' Addresses<br />
 <a name="rfc.section.1"></a><h3>1.&nbsp;
 Problem Statement</h3>
 
-<p>
+<p>CloudAudit is a HTTP based protocol that allows clients to audit
+      metadata relating to security by automated means.
 </p>
 <a name="anchor2"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.1.1"></a><h3>1.1.&nbsp;
-Level 2</h3>
+Discovery</h3>
 
-<p></p>
-<ul class="text">
-<li>
-</li>
-</ul>
-
+<p>Clients can detect support for CloudAudit via a successful HTTP GET
+        for /.well-known/cloudaudit
+</p>
 <a name="anchor3"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.1.2"></a><h3>1.2.&nbsp;
-Another Level 2</h3>
+Examples</h3>
 
+<p>This section shows a number of examples.
+</p>
+<a name="anchor4"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1.2.1"></a><h3>1.2.1.&nbsp;
+new section</h3>
+
+<p>
+</p>
 <p>preamble to the figure.
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-
-        ASCII artwork goes here...
-
-</pre></div>
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>GET /.well-known/cloudaudit/com/example/cloud HTTP/1.1</pre></div>
 <p>As you can see, this figure doodled and
-          dawdled.
+            dawdled.
 </p>
 <a name="IANA"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -296,6 +301,8 @@ References</h3>
 <table width="99%" border="0">
 <tr><td class="author-text" valign="top"><a name="RFC2119">[RFC2119]</a></td>
 <td class="author-text"><a href="mailto:sob@harvard.edu">Bradner, S.</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>,&rdquo; BCP&nbsp;14, RFC&nbsp;2119, March&nbsp;1997 (<a href="ftp://ftp.isi.edu/in-notes/rfc2119.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2119.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2119.xml">XML</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2616">[RFC2616]</a></td>
+<td class="author-text"><a href="mailto:fielding@ics.uci.edu">Fielding, R.</a>, <a href="mailto:jg@w3.org">Gettys, J.</a>, <a href="mailto:mogul@wrl.dec.com">Mogul, J.</a>, <a href="mailto:frystyk@w3.org">Frystyk, H.</a>, <a href="mailto:masinter@parc.xerox.com">Masinter, L.</a>, <a href="mailto:paulle@microsoft.com">Leach, P.</a>, and <a href="mailto:timbl@w3.org">T. Berners-Lee</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2616">Hypertext Transfer Protocol -- HTTP/1.1</a>,&rdquo; RFC&nbsp;2616, June&nbsp;1999 (<a href="ftp://ftp.isi.edu/in-notes/rfc2616.txt">TXT</a>, <a href="ftp://ftp.isi.edu/in-notes/rfc2616.ps">PS</a>, <a href="ftp://ftp.isi.edu/in-notes/rfc2616.pdf">PDF</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2616.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2616.xml">XML</a>).</td></tr>
 </table>
 
 <a name="rfc.references2"></a><br /><hr />
@@ -306,7 +313,7 @@ References</h3>
 <td class="author-text">&ldquo;,&rdquo; 2004.</td></tr>
 </table>
 
-<a name="anchor6"></a><br /><hr />
+<a name="anchor7"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.A"></a><h3>Appendix A.&nbsp;
 An Appendix</h3>
