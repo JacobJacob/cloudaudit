@@ -12,7 +12,7 @@
 <?rfc subcompact="no"?>
 <rfc category="exp" docName="draft-hoff-cloudaudit-00" ipr="trust200902">
   <front>
-    <title abbrev="Cloud Audit">CloudAudit Automated Audit, Assertion,
+    <title abbrev="CloudAudit">CloudAudit - Automated Audit, Assertion,
     Assessment, and Assurance API</title>
 
     <author fullname="Christofer Hoff" initials="C." surname="Hoff">
@@ -33,9 +33,29 @@
 
         <phone>+1-408-526-4257</phone>
 
-        <facsimile>+1-413-473-2403</facsimile>
+        <email>hoffc@cisco.com</email>
+      </address>
+    </author>
 
-        <email>fred@cisco.com</email>
+    <author fullname="Sam Johnston" initials="S." surname="Johnston">
+      <organization>Google</organization>
+
+      <address>
+        <postal>
+          <street>Brandschenkestrasse 110</street>
+
+          <city>Zurich</city>
+
+          <region></region>
+
+          <code>8002</code>
+
+          <country>Switzerland</country>
+        </postal>
+
+        <phone>+41 44 668 1679</phone>
+
+        <email>sjj@google.com</email>
       </address>
     </author>
 
@@ -48,12 +68,12 @@
     <keyword>Draft</keyword>
 
     <abstract>
-      <t>The goal of CloudAudit (codename: A6) is to provide a common
-      interface that allows cloud computing providers to automate the Audit,
-      Assertion, Assessment, and Assurance (A6) of their infrastructure
-      (IaaS), platform (PaaS), and application (SaaS) environments and allow
-      authorized consumers of their services to do likewise via an open,
-      extensible and secure interface and methodology.</t>
+      <t>CloudAudit (A6) provides a common interface that allows cloud
+      computing providers to automate the Audit, Assertion, Assessment, and
+      Assurance (A6) of their infrastructure (IaaS), platform (PaaS), and
+      application (SaaS) environments and allows authorized consumers of their
+      services to do likewise via an open, extensible and secure interface and
+      methodology.</t>
     </abstract>
 
     <note title="Requirements Language">
