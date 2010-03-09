@@ -59,13 +59,7 @@
       </address>
     </author>
 
-    <date day="26" month="February" year="2010" />
-
-    <area>Routing Area</area>
-
-    <workgroup>Interdomain Routing Working Group</workgroup>
-
-    <keyword>Draft</keyword>
+    <date day="9" month="March" year="2010" />
 
     <abstract>
       <t>CloudAudit (A6) provides a common interface that allows cloud
@@ -85,36 +79,109 @@
   </front>
 
   <middle>
-    <section title="Problem Statement">
+    <section title="Introduction">
       <t>CloudAudit is a HTTP based protocol that allows clients to audit
       metadata relating to security by automated means.</t>
+    </section>
 
-      <section title="Discovery">
-        <t>Clients can detect support for CloudAudit via a successful HTTP GET
-        for /.well-known/cloudaudit</t>
-      </section>
+    <section title="Notational Conventions">
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+      "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+      document are to be interpreted as described in BCP 14, <xref
+      target="RFC2119"></xref>, as scoped to those conformance targets.</t>
 
-      <section title="Examples">
-        <t>This section shows a number of examples.</t>
+      <t>This document uses the Augmented Backus-Naur Form (ABNF) notation of
+      <xref target="RFC2616"></xref>.</t>
 
-        <section title="new section">
+      <t>Additionally, the following rules are included from <xref
+      target="RFC3986"></xref>: URI.</t>
+    </section>
+
+    <section title="Namespace">
+      <t>CloudAudit relies on the DNS to divide the assertion and glossary
+      namespaces in an extensible fashion without registries. The DNS name
+      (e.g. cloud.example.com) is broken into its components (e.g. cloud,
+      example, com), reversed (e.g. com, example, cloud) and recombined to
+      create a path (e.g. com/example/cloud). URI schemes and paths are NOT
+      supported (e.g. https://example.com/cloud).</t>
+    </section>
+
+    <section title="Discovery">
+      <t>Clients MAY detect support for CloudAudit via a successful HTTP GET
+      or HEAD for the URL /.well-known/cloudaudit.</t>
+
+      <t>Servers MAY specify a remote CloudAudit service in the HTTP Link:
+      header and/or HTML LINK element with rel="cloudaudit".</t>
+    </section>
+
+    <section title="Enumeration">
+      <t>Servers SHOULD render a valid XML response to a HTTP request for a
+      directory, containing an A or LINK element for every child with a HREF
+      attribute containing the relative URL of the child. This response MAY be
+      HyperText Markup Language (HTML). Clients MUST NOT rely on this
+      functionality.</t>
+    </section>
+
+    <section title="Assertions">
+      <t>Assertions can be made about the local service and/or remote
+      service(s).</t>
+
+      <section title="Local Assertions">
+        <t></t>
+
+        <section title="Examples">
           <t></t>
 
           <figure>
-            <preamble>preamble to the figure.</preamble>
+            <artwork><![CDATA[GET /.well-known/cloudaudit/1.0/assert/org/iso/3166-1 HTTP/1.1]]></artwork>
+          </figure>
+        </section>
+      </section>
 
-            <artwork><![CDATA[GET /.well-known/cloudaudit/com/example/cloud HTTP/1.1]]></artwork>
+      <section title="Remote Assertions">
+        <t>There are a number of scenarios where it is necessary to answer
+        CloudAudit queries on behalf of others, including:<list
+            style="symbols">
+            <t>Responding to queries on behalf of multiple servers</t>
 
-            <postamble>As you can see, this figure doodled and
-            dawdled.</postamble>
+            <t>Responding to queries from multiple clients</t>
+
+            <t>Proxying in order to supplement or override assertions</t>
+
+            <t>Incompatibilities with existing systems and software that
+            prevents co-location</t>
+          </list></t>
+
+        <t>Remote assertions are supported by embedding both the name (e.g.
+        cloud.example.com) and the assertion queried (e.g. 3166-1.iso.org) in
+        the URL. The name and assertion MUST be delineated with a '/-/' URL
+        component as they may vary in length.</t>
+
+        <section title="Examples">
+          <t>This example shows a remote query on behalf of cloud.example.com
+          for the 3166-1.iso.org assertion.</t>
+
+          <figure>
+            <artwork><![CDATA[GET /.well-known/cloudaudit/1.0/assert/com/example/cloud/-/org/iso/3166-1 HTTP/1.1]]></artwork>
           </figure>
         </section>
       </section>
     </section>
 
-    <section title="Namespace">
-      <t>CloudAudit relies on the Domain Name System (DNS) to divide the
-      namespace.</t>
+    <section title="Glossary">
+      <t>The glossary allows clients to enumerate or resolve and obtain
+      documentation for each assertion type. Servers MUST provide a HTML
+      representation and MAY provide alternative representations via HTTP
+      content negotiation.</t>
+
+      <section title="Examples">
+        <t>The following shows a query for the 3166-1.iso.org assertion
+        type.</t>
+
+        <figure>
+          <artwork><![CDATA[GET /.well-known/cloudaudit/1.0/glossary/org/iso/3166-1 HTTP/1.1]]></artwork>
+        </figure>
+      </section>
     </section>
 
     <section title="Digital Signatures">
@@ -129,12 +196,15 @@
       RFC.</t>
     </section>
 
-    <section anchor="Security" title="Security Considerations">
-      <t></t>
+    <section title="Security Considerations">
+      <t>The content of CloudAudit repositories MAY NOT be secure, private or
+      integrity-guaranteed, and due caution should be exercised when using
+      them.</t>
     </section>
 
     <section anchor="Acknowledgements" title="Acknowledgements">
-      <t></t>
+      <t>The authors would like to acknowledge all members of the CloudAudit
+      Working Group as well as early adopters.</t>
     </section>
   </middle>
 
@@ -159,8 +229,26 @@
       </reference>
     </references>
 
-    <section title="An Appendix">
-      <t></t>
+    <section title="Initial Registry Contents">
+      <t>The CloudAudit registry's initial contents are:<list style="symbols">
+          <t>Relation Name: copyright</t>
+
+          <t>Description: Refers to a copyright statement that applies to the
+          link's context.</t>
+
+          <t>Reference: <xref target="W3C.REC-html401-19991224"></xref></t>
+        </list></t>
+    </section>
+
+    <section title="Initial Registry Contents">
+      <t>The CloudAudit registry's initial contents are:<list style="symbols">
+          <t>Relation Name: copyright</t>
+
+          <t>Description: Refers to a copyright statement that applies to the
+          link's context.</t>
+
+          <t>Reference: <xref target="W3C.REC-html401-19991224"></xref></t>
+        </list></t>
     </section>
   </back>
 </rfc>
