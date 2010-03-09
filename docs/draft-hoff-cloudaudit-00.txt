@@ -1,11 +1,11 @@
 
 
 
-Interdomain Routing Working Group                                C. Hoff
+Network Working Group                                            C. Hoff
 Internet-Draft                                             Cisco Systems
 Intended status: Experimental                                S. Johnston
-Expires: August 30, 2010                                          Google
-                                                       February 26, 2010
+Expires: September 10, 2010                                       Google
+                                                           March 9, 2010
 
 
  CloudAudit - Automated Audit, Assertion, Assessment, and Assurance API
@@ -47,14 +47,14 @@ Status of this Memo
    The list of Internet-Draft Shadow Directories can be accessed at
    http://www.ietf.org/shadow.html.
 
-   This Internet-Draft will expire on August 30, 2010.
+   This Internet-Draft will expire on September 10, 2010.
 
 
 
 
-Hoff & Johnston          Expires August 30, 2010                [Page 1]
+Hoff & Johnston        Expires September 10, 2010               [Page 1]
 
-Internet-Draft                 CloudAudit                  February 2010
+Internet-Draft                 CloudAudit                     March 2010
 
 
 Copyright Notice
@@ -75,20 +75,27 @@ Copyright Notice
 
 Table of Contents
 
-   1.  Problem Statement . . . . . . . . . . . . . . . . . . . . . . . 3
-     1.1.  Discovery . . . . . . . . . . . . . . . . . . . . . . . . . 3
-     1.2.  Examples  . . . . . . . . . . . . . . . . . . . . . . . . . 3
-       1.2.1.  new section . . . . . . . . . . . . . . . . . . . . . . 3
-   2.  Namespace . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
-   3.  Digital Signatures  . . . . . . . . . . . . . . . . . . . . . . 3
-   4.  IANA Considerations . . . . . . . . . . . . . . . . . . . . . . 3
-   5.  Security Considerations . . . . . . . . . . . . . . . . . . . . 3
-   6.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . 3
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . . . 4
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . . . 4
-     7.2.  Informative References  . . . . . . . . . . . . . . . . . . 4
-   Appendix A.  An Appendix  . . . . . . . . . . . . . . . . . . . . . 4
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . . 4
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . . . 3
+   2.  Notational Conventions  . . . . . . . . . . . . . . . . . . . . 3
+   3.  Namespace . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+   4.  Discovery . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+   5.  Enumeration . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+   6.  Assertions  . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+     6.1.  Local Assertions  . . . . . . . . . . . . . . . . . . . . . 4
+       6.1.1.  Examples  . . . . . . . . . . . . . . . . . . . . . . . 4
+     6.2.  Remote Assertions . . . . . . . . . . . . . . . . . . . . . 4
+       6.2.1.  Examples  . . . . . . . . . . . . . . . . . . . . . . . 4
+   7.  Glossary  . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+     7.1.  Examples  . . . . . . . . . . . . . . . . . . . . . . . . . 5
+   8.  Digital Signatures  . . . . . . . . . . . . . . . . . . . . . . 5
+   9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . . . 5
+   10. Security Considerations . . . . . . . . . . . . . . . . . . . . 5
+   11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . 5
+   12. References  . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+     12.1. Normative References  . . . . . . . . . . . . . . . . . . . 5
+     12.2. Informative References  . . . . . . . . . . . . . . . . . . 6
+   Appendix A.  Initial Registry Contents  . . . . . . . . . . . . . . 6
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . . 6
 
 
 
@@ -101,52 +108,136 @@ Table of Contents
 
 
 
-
-
-
-
-
-
-
-Hoff & Johnston          Expires August 30, 2010                [Page 2]
+Hoff & Johnston        Expires September 10, 2010               [Page 2]
 
-Internet-Draft                 CloudAudit                  February 2010
+Internet-Draft                 CloudAudit                     March 2010
 
 
-1.  Problem Statement
+1.  Introduction
 
    CloudAudit is a HTTP based protocol that allows clients to audit
    metadata relating to security by automated means.
 
-1.1.  Discovery
 
-   Clients can detect support for CloudAudit via a successful HTTP GET
-   for /.well-known/cloudaudit
+2.  Notational Conventions
 
-1.2.  Examples
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in BCP 14, [RFC2119], as
+   scoped to those conformance targets.
 
-   This section shows a number of examples.
+   This document uses the Augmented Backus-Naur Form (ABNF) notation of
+   [RFC2616].
 
-1.2.1.  new section
-
-   preamble to the figure.
-   GET /.well-known/cloudaudit/com/example/cloud HTTP/1.1
-   As you can see, this figure doodled and dawdled.
+   Additionally, the following rules are included from [RFC3986]: URI.
 
 
-2.  Namespace
+3.  Namespace
 
-   CloudAudit relies on the Domain Name System (DNS) to divide the
-   namespace.
+   CloudAudit relies on the DNS to divide the assertion and glossary
+   namespaces in an extensible fashion without registries.
+
+   The DNS name (e.g. cloud.example.com) is broken into its components
+   (e.g. cloud, example, com), reversed (e.g. com, example, cloud) and
+   recombined to create a path (e.g. com/example/cloud).
+
+   URI schemes and paths are NOT supported (e.g.
+   https://example.com/cloud), however it is possible to advertise an
+   alternative (e.g. cloud.example.com) via the HTTP Link header and/or
+   HTML LINK element (Section 4).
 
 
-3.  Digital Signatures
+4.  Discovery
+
+   Clients MAY detect support for CloudAudit via a successful HTTP GET
+   or HEAD for the URL /.well-known/cloudaudit.
+
+   Servers MAY specify a remote CloudAudit service in the HTTP Link:
+   header and/or HTML LINK element with rel="cloudaudit".
+
+
+5.  Enumeration
+
+   Servers SHOULD render a valid XML response to a HTTP request for a
+   directory, containing an A or LINK element for every child with a
+   HREF attribute containing the relative URL of the child.  This
+
+
+
+Hoff & Johnston        Expires September 10, 2010               [Page 3]
+
+Internet-Draft                 CloudAudit                     March 2010
+
+
+   response MAY be HyperText Markup Language (HTML).  Clients MUST NOT
+   rely on this functionality.
+
+
+6.  Assertions
+
+   Assertions can be made about the local service and/or remote
+   service(s).
+
+6.1.  Local Assertions
+
+6.1.1.  Examples
+
+   GET /.well-known/cloudaudit/1.0/assert/org/iso/3166-1 HTTP/1.1
+
+6.2.  Remote Assertions
+
+   There are a number of scenarios where it is necessary to answer
+   CloudAudit queries on behalf of others, including:
+
+   o  Responding to queries on behalf of multiple servers
+
+   o  Responding to queries from multiple clients
+
+   o  Proxying in order to supplement or override assertions
+
+   o  Incompatibilities with existing systems and software that prevents
+      co-location
+
+   Remote assertions are supported by embedding both the name (e.g.
+   cloud.example.com) and the assertion queried (e.g. 3166-1.iso.org) in
+   the URL.  The name and assertion MUST be delineated with a '/-/' URL
+   component as they may vary in length.
+
+6.2.1.  Examples
+
+   This example shows a remote query on behalf of cloud.example.com for
+   the 3166-1.iso.org assertion.
+GET /.well-known/cloudaudit/1.0/assert/com/example/cloud/-/org/iso/3166-1 HTTP/1.1
+
+
+7.  Glossary
+
+   The glossary allows clients to enumerate or resolve and obtain
+   documentation for each assertion type.  Servers MUST provide a HTML
+   representation and MAY provide alternative representations via HTTP
+   content negotiation.
+
+
+
+
+Hoff & Johnston        Expires September 10, 2010               [Page 4]
+
+Internet-Draft                 CloudAudit                     March 2010
+
+
+7.1.  Examples
+
+   The following shows a query for the 3166-1.iso.org assertion type.
+   GET /.well-known/cloudaudit/1.0/glossary/org/iso/3166-1 HTTP/1.1
+
+
+8.  Digital Signatures
 
    Digital signatures allow clients to verify the integrity of the
    assertions (both first-party and third-party).
 
 
-4.  IANA Considerations
+9.  IANA Considerations
 
    This document makes no request of IANA.
 
@@ -154,22 +245,22 @@ Internet-Draft                 CloudAudit                  February 2010
    RFC.
 
 
-5.  Security Considerations
+10.  Security Considerations
+
+   The content of CloudAudit repositories MAY NOT be secure, private or
+   integrity-guaranteed, and due caution should be exercised when using
+   them.
 
 
-6.  Acknowledgements
+11.  Acknowledgements
+
+   The authors would like to acknowledge all members of the CloudAudit
+   Working Group as well as early adopters.
 
 
-7.  References
+12.  References
 
-
-
-Hoff & Johnston          Expires August 30, 2010                [Page 3]
-
-Internet-Draft                 CloudAudit                  February 2010
-
-
-7.1.  Normative References
+12.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
@@ -178,12 +269,37 @@ Internet-Draft                 CloudAudit                  February 2010
               Masinter, L., Leach, P., and T. Berners-Lee, "Hypertext
               Transfer Protocol -- HTTP/1.1", RFC 2616, June 1999.
 
-7.2.  Informative References
+   [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
+              Resource Identifier (URI): Generic Syntax", STD 66,
+              RFC 3986, January 2005.
 
-   [InfRef]   "", 2004.
 
 
-Appendix A.  An Appendix
+
+Hoff & Johnston        Expires September 10, 2010               [Page 5]
+
+Internet-Draft                 CloudAudit                     March 2010
+
+
+   [W3C.REC-html401-19991224]
+              Hors, A., Jacobs, I., and D. Raggett, "HTML 4.01
+              Specification", World Wide Web Consortium
+              Recommendation REC-html401-19991224, December 1999,
+              <http://www.w3.org/TR/1999/REC-html401-19991224>.
+
+12.2.  Informative References
+
+
+Appendix A.  Initial Registry Contents
+
+   The CloudAudit registry's initial contents are:
+
+   o  Assertion Name: org.iso.3166-1
+
+   o  Description: Codes for the representation of names of countries
+      and their subdivisions -- Part 1: Country codes
+
+   o  Reference: http://www.iso.org/iso/iso-3166-1_decoding_table
 
 
 Authors' Addresses
@@ -216,10 +332,6 @@ Authors' Addresses
 
 
 
-
-
-
-
-Hoff & Johnston          Expires August 30, 2010                [Page 4]
+Hoff & Johnston        Expires September 10, 2010               [Page 6]
 
 
