@@ -99,14 +99,19 @@
 
     <section title="Namespace">
       <t>CloudAudit relies on the DNS to divide the assertion and glossary
-      namespaces in an extensible fashion without registries. The DNS name
-      (e.g. cloud.example.com) is broken into its components (e.g. cloud,
-      example, com), reversed (e.g. com, example, cloud) and recombined to
-      create a path (e.g. com/example/cloud). URI schemes and paths are NOT
-      supported (e.g. https://example.com/cloud).</t>
+      namespaces in an extensible fashion without registries.</t>
+
+      <t>The DNS name (e.g. cloud.example.com) is broken into its components
+      (e.g. cloud, example, com), reversed (e.g. com, example, cloud) and
+      recombined to create a path (e.g. com/example/cloud).</t>
+
+      <t>URI schemes and paths are NOT supported (e.g.
+      https://example.com/cloud), however it is possible to advertise an
+      alternative (e.g. cloud.example.com) via the HTTP Link header and/or
+      HTML LINK element (<xref target="discovery"></xref>).</t>
     </section>
 
-    <section title="Discovery">
+    <section anchor="discovery" title="Discovery">
       <t>Clients MAY detect support for CloudAudit via a successful HTTP GET
       or HEAD for the URL /.well-known/cloudaudit.</t>
 
@@ -213,41 +218,22 @@
       <?rfc include="reference.RFC.2119"?>
 
       <?rfc include="reference.RFC.2616"?>
+
+      <?rfc include="reference.RFC.3986"?>
+
+      <?rfc include="reference.W3C.REC-html401-19991224"?>
     </references>
 
-    <references title="Informative References">
-      <reference anchor="InfRef">
-        <front>
-          <title></title>
-
-          <author>
-            <organization></organization>
-          </author>
-
-          <date year="2004" />
-        </front>
-      </reference>
-    </references>
+    <references title="Informative References"></references>
 
     <section title="Initial Registry Contents">
       <t>The CloudAudit registry's initial contents are:<list style="symbols">
-          <t>Relation Name: copyright</t>
+          <t>Assertion Name: org.iso.3166-1</t>
 
-          <t>Description: Refers to a copyright statement that applies to the
-          link's context.</t>
+          <t>Description: Codes for the representation of names of countries
+          and their subdivisions -- Part 1: Country codes </t>
 
-          <t>Reference: <xref target="W3C.REC-html401-19991224"></xref></t>
-        </list></t>
-    </section>
-
-    <section title="Initial Registry Contents">
-      <t>The CloudAudit registry's initial contents are:<list style="symbols">
-          <t>Relation Name: copyright</t>
-
-          <t>Description: Refers to a copyright statement that applies to the
-          link's context.</t>
-
-          <t>Reference: <xref target="W3C.REC-html401-19991224"></xref></t>
+          <t>Reference: http://www.iso.org/iso/iso-3166-1_decoding_table</t>
         </list></t>
     </section>
   </back>
