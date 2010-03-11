@@ -13,12 +13,11 @@ Expires: September 10, 2010                                       Google
 
 Abstract
 
-   CloudAudit (A6) provides a common interface that allows cloud
-   computing providers to automate the Audit, Assertion, Assessment, and
-   Assurance (A6) of their infrastructure (IaaS), platform (PaaS), and
-   application (SaaS) environments and allows authorized consumers of
-   their services to do likewise via an open, extensible and secure
-   interface and methodology.
+   CloudAudit (A6) provides an open, extensible and secure interface
+   that allows cloud computing providers to expose Audit, Assertion,
+   Assessment, and Assurance (A6) information for cloud infrastructure
+   (IaaS), platform (PaaS), and application (SaaS) services to
+   authorized clients.
 
 Requirements Language
 
@@ -49,6 +48,7 @@ Status of this Memo
 
    This Internet-Draft will expire on September 10, 2010.
 
+Copyright Notice
 
 
 
@@ -56,8 +56,6 @@ Hoff & Johnston        Expires September 10, 2010               [Page 1]
 
 Internet-Draft                 CloudAudit                     March 2010
 
-
-Copyright Notice
 
    Copyright (c) 2010 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
@@ -77,25 +75,27 @@ Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . . . 3
    2.  Notational Conventions  . . . . . . . . . . . . . . . . . . . . 3
-   3.  Namespace . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
-   4.  Discovery . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
-   5.  Enumeration . . . . . . . . . . . . . . . . . . . . . . . . . . 3
-   6.  Assertions  . . . . . . . . . . . . . . . . . . . . . . . . . . 4
-     6.1.  Local Assertions  . . . . . . . . . . . . . . . . . . . . . 4
-       6.1.1.  Examples  . . . . . . . . . . . . . . . . . . . . . . . 4
-     6.2.  Remote Assertions . . . . . . . . . . . . . . . . . . . . . 4
-       6.2.1.  Examples  . . . . . . . . . . . . . . . . . . . . . . . 4
-   7.  Glossary  . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
-     7.1.  Examples  . . . . . . . . . . . . . . . . . . . . . . . . . 5
-   8.  Digital Signatures  . . . . . . . . . . . . . . . . . . . . . . 5
-   9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . . . 5
-   10. Security Considerations . . . . . . . . . . . . . . . . . . . . 5
-   11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . 5
-   12. References  . . . . . . . . . . . . . . . . . . . . . . . . . . 5
-     12.1. Normative References  . . . . . . . . . . . . . . . . . . . 5
-     12.2. Informative References  . . . . . . . . . . . . . . . . . . 6
-   Appendix A.  Initial Registry Contents  . . . . . . . . . . . . . . 6
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . . 6
+   3.  Discovery . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+   4.  Enumeration . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+   5.  Namespaces  . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+     5.1.  Glossary namespace  . . . . . . . . . . . . . . . . . . . . 4
+       5.1.1.  Examples  . . . . . . . . . . . . . . . . . . . . . . . 5
+     5.2.  Service namespace . . . . . . . . . . . . . . . . . . . . . 5
+       5.2.1.  Local Assertions  . . . . . . . . . . . . . . . . . . . 5
+       5.2.2.  Remote Assertions . . . . . . . . . . . . . . . . . . . 5
+       5.2.3.  Third-party Assertions  . . . . . . . . . . . . . . . . 6
+   6.  Digital Signatures  . . . . . . . . . . . . . . . . . . . . . . 6
+   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . . . 6
+   8.  Security Considerations . . . . . . . . . . . . . . . . . . . . 7
+   9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . 7
+   10. References  . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+     10.1. Normative References  . . . . . . . . . . . . . . . . . . . 7
+     10.2. Informative References  . . . . . . . . . . . . . . . . . . 8
+   Appendix A.  Initial Registry Contents  . . . . . . . . . . . . . . 8
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+
+
 
 
 
@@ -115,8 +115,29 @@ Internet-Draft                 CloudAudit                     March 2010
 
 1.  Introduction
 
-   CloudAudit is a HTTP based protocol that allows clients to audit
-   metadata relating to security by automated means.
+   CloudAudit is a HTTP based protocol that allows cloud computing
+   clients to audit metadata relating to security by automated means.
+   The first release is designed to be as simple as possible so as it
+   can be implemented by creating a directory structure and uploading
+   files to a standard web server that implements HTTP [RFC2616].
+   Subsequent releases may add the ability to write definitions and
+   assertions, and to request new assertions be generated (e.g. a
+   network scan).  That is, while 1.x versions are read-only, subsequent
+   releases may be read-write.
+
+   A client will typically interrogate the service and verify compliance
+   with local policy before making use of it.  It may do so by checking
+   certain pre-defined parameters (for example, the geographical
+   location of the servers, compliance with prevailing security
+   standards, etc.) or it may enumerate some/all of the information
+   available and present it to an operator for a manual decision.  This
+   process may be fully automated, for example when searching for least
+   cost services or for an alternative service for failover.
+
+   As it is impossible to tell in advance what information will be of
+   interest to clients and what service providers will be willing to
+   expose, a safely extensible mechanism has been devised which allows
+   any domain name owner to publish both definitions and assertions.
 
 
 2.  Notational Conventions
@@ -132,35 +153,14 @@ Internet-Draft                 CloudAudit                     March 2010
    Additionally, the following rules are included from [RFC3986]: URI.
 
 
-3.  Namespace
+3.  Discovery
 
-   CloudAudit relies on the DNS to divide the assertion and glossary
-   namespaces in an extensible fashion without registries.
+   Clients SHOULD detect support for CloudAudit via a successful HTTP
+   GET or HEAD for the URL /.well-known/cloudaudit.  If clients do not
+   confirm the existence of a CloudAudit repository then they may be
+   susceptible to false negatives (that is, falsely assuming an
+   assertion is absent when in fact the entire repository is absent).
 
-   The DNS name (e.g. cloud.example.com) is broken into its components
-   (e.g. cloud, example, com), reversed (e.g. com, example, cloud) and
-   recombined to create a path (e.g. com/example/cloud).
-
-   URI schemes and paths are NOT supported (e.g.
-   https://example.com/cloud), however it is possible to advertise an
-   alternative (e.g. cloud.example.com) via the HTTP Link header and/or
-   HTML LINK element (Section 4).
-
-
-4.  Discovery
-
-   Clients MAY detect support for CloudAudit via a successful HTTP GET
-   or HEAD for the URL /.well-known/cloudaudit.
-
-   Servers MAY specify a remote CloudAudit service in the HTTP Link:
-   header and/or HTML LINK element with rel="cloudaudit".
-
-
-5.  Enumeration
-
-   Servers SHOULD render a valid XML response to a HTTP request for a
-   directory, containing an A or LINK element for every child with a
-   HREF attribute containing the relative URL of the child.  This
 
 
 
@@ -169,22 +169,101 @@ Hoff & Johnston        Expires September 10, 2010               [Page 3]
 Internet-Draft                 CloudAudit                     March 2010
 
 
+   Servers MAY specify a remote CloudAudit service in the HTTP Link:
+   header and/or HTML LINK element with rel="cloudaudit".  This allows a
+   single CloudAudit server to answers requests for multiple services.
+
+
+4.  Enumeration
+
+   Servers SHOULD render a valid XML response to a HTTP request for a
+   directory, containing an A or LINK element for every child with a
+   HREF attribute containing the relative URL of the child.  This
    response MAY be HyperText Markup Language (HTML).  Clients MUST NOT
    rely on this functionality.
 
+   This format was selected because most popular web servers include
+   functionality for generating "fancy indexes", thereby supporting this
+   functionality "out of the box".
 
-6.  Assertions
+
+5.  Namespaces
+
+   CloudAudit defines two namespaces; the glossary namespace which
+   contains definitions and the service namespace which contains
+   assertions.  It relies on the Domain Name Service (DNS) to divide the
+   glossary and service namespaces in an extensible fashion without
+   relying on registries.
+
+   A domain name (e.g. example.com) under the control of the party is
+   broken into its components (e.g. example, com), reversed (e.g. com,
+   example) and recombined (e.g. com.example).  That party "owns" this
+   namespace so long as the domain is registered to them and they may
+   subdivide it with components in order to reference and/or categorise
+   glossary definitions and service assertions.  These MAY or MAY NOT
+   represent valid hosts in the DNS.
+
+   URI schemes and paths are NOT supported (e.g.
+   https://example.com/cloud), however it is possible for a service to
+   advertise an alternate name (e.g. cloud.example.com) via the HTTP
+   Link header and/or HTML LINK element (Section 3).
+
+5.1.  Glossary namespace
+
+   The glossary allows clients to enumerate and/or resolve definitions,
+   and to obtain additional documentation.  Servers MUST provide a plain
+   text representation and MAY provide alternative representations (such
+   as HTML) via HTTP content negotiation.
+
+
+
+
+
+
+Hoff & Johnston        Expires September 10, 2010               [Page 4]
+
+Internet-Draft                 CloudAudit                     March 2010
+
+
+5.1.1.  Examples
+
+   The following shows client obtaining a definition for org.iso.3166-1.
+   < GET /.well-known/cloudaudit/service/org/iso/3166-1 HTTP/1.1
+   < Host: iso.org
+   <
+   > HTTP/1.1 200 OK
+   > Content-Length: 24
+   > Content-Type: text/plain
+   >
+   > ISO 3166-1 Country Codes
+
+5.2.  Service namespace
 
    Assertions can be made about the local service and/or remote
    service(s).
 
-6.1.  Local Assertions
+5.2.1.  Local Assertions
 
-6.1.1.  Examples
+   Local assertions refer to the service(s) sharing the same URL end-
+   point as the CloudAudit repository.  They can be identified by the
+   absence of a '/-/' component in the URL (which is used as a
+   delineator for Remote Assertions Section 5.2.2) and can normally be
+   implemented using symbolic links or web server configuration.
 
-   GET /.well-known/cloudaudit/1.0/assert/org/iso/3166-1 HTTP/1.1
+5.2.1.1.  Examples
 
-6.2.  Remote Assertions
+   This example shows a client retrieving the ISO 3166-1 country code(s)
+   from which the cloud.example.com service is being provided.
+   < GET /.well-known/cloudaudit/service/org/iso/3166-1 HTTP/1.1
+   < Host: iso.org
+   <
+   > HTTP/1.1 200 OK
+   > Content-Length: 3
+   > Content-Type: text/plain
+   >
+   > US
+
+5.2.2.  Remote Assertions
 
    There are a number of scenarios where it is necessary to answer
    CloudAudit queries on behalf of others, including:
@@ -192,6 +271,15 @@ Internet-Draft                 CloudAudit                     March 2010
    o  Responding to queries on behalf of multiple servers
 
    o  Responding to queries from multiple clients
+
+
+
+
+
+Hoff & Johnston        Expires September 10, 2010               [Page 5]
+
+Internet-Draft                 CloudAudit                     March 2010
+
 
    o  Proxying in order to supplement or override assertions
 
@@ -203,41 +291,38 @@ Internet-Draft                 CloudAudit                     March 2010
    the URL.  The name and assertion MUST be delineated with a '/-/' URL
    component as they may vary in length.
 
-6.2.1.  Examples
+5.2.2.1.  Examples
 
-   This example shows a remote query on behalf of cloud.example.com for
-   the 3166-1.iso.org assertion.
-GET /.well-known/cloudaudit/1.0/assert/com/example/cloud/-/org/iso/3166-1 HTTP/1.1
+   This example shows a client retrieving the ISO 3166-1 country code(s)
+   from which the cloud.example.com service is being provided, from the
+   remote server cloudaudit.net.
+< GET /.well-known/cloudaudit/service/com/example/cloud/-/org/iso/3166-1 HTTP/1.1
+< Host: cloudaudit.net
+<
+> HTTP/1.1 200 OK
+> Content-Length: 3
+> Content-Type: text/plain
+>
+> US
 
+5.2.3.  Third-party Assertions
 
-7.  Glossary
-
-   The glossary allows clients to enumerate or resolve and obtain
-   documentation for each assertion type.  Servers MUST provide a HTML
-   representation and MAY provide alternative representations via HTTP
-   content negotiation.
-
-
-
-
-Hoff & Johnston        Expires September 10, 2010               [Page 4]
-
-Internet-Draft                 CloudAudit                     March 2010
-
-
-7.1.  Examples
-
-   The following shows a query for the 3166-1.iso.org assertion type.
-   GET /.well-known/cloudaudit/1.0/glossary/org/iso/3166-1 HTTP/1.1
+   It may be necessary for third-parties to make assertions, for example
+   where an auditor certifies compliance with a given standard at a
+   given time.  This can be achieved either by retrieving a trusted
+   representation (for example, an image containing a physical
+   signature, or a digitally signed document) from the first-party or by
+   being redirected to a third-party and retrieving the assertion
+   directly from them.
 
 
-8.  Digital Signatures
+6.  Digital Signatures
 
    Digital signatures allow clients to verify the integrity of the
    assertions (both first-party and third-party).
 
 
-9.  IANA Considerations
+7.  IANA Considerations
 
    This document makes no request of IANA.
 
@@ -245,22 +330,52 @@ Internet-Draft                 CloudAudit                     March 2010
    RFC.
 
 
-10.  Security Considerations
+
+
+Hoff & Johnston        Expires September 10, 2010               [Page 6]
+
+Internet-Draft                 CloudAudit                     March 2010
+
+
+8.  Security Considerations
 
    The content of CloudAudit repositories MAY NOT be secure, private or
-   integrity-guaranteed, and due caution should be exercised when using
-   them.
+   integrity-guaranteed, and due caution should be exercised.  Clients
+   SHOULD use Transport Layer Security (TLS) [RFC5246] or equivalent to
+   ensure confidentiality and integrity when accessing CloudAudit
+   repositories over a public network such as the Internet.
+
+   The Domain Name System (DNS) MAY be susceptible to attacks and care
+   should be taken to authenticate servers, for example by verifying the
+   chain of trust and infromation contained in SSL certificates
+   provided, by using a Virtual Private Network (VPN) service, by
+   relying on DNSSEC [RFC4033], etc.
+
+   Malicious clients MAY seek to obtain sensitive information via
+   CloudAudit which could then be used to launch an attack.  Such
+   information should only be made available to authorised clients who
+   have been authenticated via HTTP authentication [RFC2617] or
+   equivalent.
+
+   Servers may make false first-party assertions or may refer to third-
+   party assertions that do not apply to them, or that expand the scope
+   of the intended meaning.  Clients that do not trust servers may
+   choose only to rely on trusted third-party assertions, in which case
+   the integrity of the assertion SHOULD be verified by transferring it
+   over Transport Layer Security (TLS) [RFC5246] or equivalent or by
+   verifying a digital signature applied to the assertion using OpenPGP
+   [RFC4880] or equivalent
 
 
-11.  Acknowledgements
+9.  Acknowledgements
 
    The authors would like to acknowledge all members of the CloudAudit
    Working Group as well as early adopters.
 
 
-12.  References
+10.  References
 
-12.1.  Normative References
+10.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
@@ -269,17 +384,32 @@ Internet-Draft                 CloudAudit                     March 2010
               Masinter, L., Leach, P., and T. Berners-Lee, "Hypertext
               Transfer Protocol -- HTTP/1.1", RFC 2616, June 1999.
 
+   [RFC2617]  Franks, J., Hallam-Baker, P., Hostetler, J., Lawrence, S.,
+
+
+
+Hoff & Johnston        Expires September 10, 2010               [Page 7]
+
+Internet-Draft                 CloudAudit                     March 2010
+
+
+              Leach, P., Luotonen, A., and L. Stewart, "HTTP
+              Authentication: Basic and Digest Access Authentication",
+              RFC 2617, June 1999.
+
    [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
               Resource Identifier (URI): Generic Syntax", STD 66,
               RFC 3986, January 2005.
 
+   [RFC4033]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
+              Rose, "DNS Security Introduction and Requirements",
+              RFC 4033, March 2005.
 
+   [RFC4880]  Callas, J., Donnerhacke, L., Finney, H., Shaw, D., and R.
+              Thayer, "OpenPGP Message Format", RFC 4880, November 2007.
 
-
-Hoff & Johnston        Expires September 10, 2010               [Page 5]
-
-Internet-Draft                 CloudAudit                     March 2010
-
+   [RFC5246]  Dierks, T. and E. Rescorla, "The Transport Layer Security
+              (TLS) Protocol Version 1.2", RFC 5246, August 2008.
 
    [W3C.REC-html401-19991224]
               Hors, A., Jacobs, I., and D. Raggett, "HTML 4.01
@@ -287,7 +417,7 @@ Internet-Draft                 CloudAudit                     March 2010
               Recommendation REC-html401-19991224, December 1999,
               <http://www.w3.org/TR/1999/REC-html401-19991224>.
 
-12.2.  Informative References
+10.2.  Informative References
 
 
 Appendix A.  Initial Registry Contents
@@ -302,15 +432,32 @@ Appendix A.  Initial Registry Contents
    o  Reference: http://www.iso.org/iso/iso-3166-1_decoding_table
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+Hoff & Johnston        Expires September 10, 2010               [Page 8]
+
+Internet-Draft                 CloudAudit                     March 2010
+
+
 Authors' Addresses
 
    Christofer Hoff
    Cisco Systems
-   1121 Via Del Rey
-   Santa Barbara, California  93117
+   125 High Street
+   Boston, MA  02110-2704
    USA
 
-   Phone: +1-408-526-4257
+   Phone: +1 (617) 261 3700&#8206;
    Email: hoffc@cisco.com
 
 
@@ -320,7 +467,7 @@ Authors' Addresses
    Zurich,   8002
    Switzerland
 
-   Phone: +41 44 668 1679
+   Phone: +41 44 668 18 00&#8206;
    Email: sjj@google.com
 
 
@@ -332,6 +479,27 @@ Authors' Addresses
 
 
 
-Hoff & Johnston        Expires September 10, 2010               [Page 6]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hoff & Johnston        Expires September 10, 2010               [Page 9]
 
 

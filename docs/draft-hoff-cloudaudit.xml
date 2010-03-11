@@ -20,18 +20,18 @@
 
       <address>
         <postal>
-          <street>1121 Via Del Rey</street>
+          <street>125 High Street</street>
 
-          <city>Santa Barbara</city>
+          <city>Boston</city>
 
-          <code>93117</code>
+          <code>02110-2704</code>
 
-          <region>California</region>
+          <region>MA</region>
 
           <country>USA</country>
         </postal>
 
-        <phone>+1-408-526-4257</phone>
+        <phone>+1 (617) 261 3700&#8206;</phone>
 
         <email>hoffc@cisco.com</email>
       </address>
@@ -53,7 +53,7 @@
           <country>Switzerland</country>
         </postal>
 
-        <phone>+41 44 668 1679</phone>
+        <phone>+41 44 668 18 00&#8206;</phone>
 
         <email>sjj@google.com</email>
       </address>
@@ -62,12 +62,11 @@
     <date day="9" month="March" year="2010" />
 
     <abstract>
-      <t>CloudAudit (A6) provides a common interface that allows cloud
-      computing providers to automate the Audit, Assertion, Assessment, and
-      Assurance (A6) of their infrastructure (IaaS), platform (PaaS), and
-      application (SaaS) environments and allows authorized consumers of their
-      services to do likewise via an open, extensible and secure interface and
-      methodology.</t>
+      <t>CloudAudit (A6) provides an open, extensible and secure interface
+      that allows cloud computing providers to expose Audit, Assertion,
+      Assessment, and Assurance (A6) information for cloud infrastructure
+      (IaaS), platform (PaaS), and application (SaaS) services to authorized
+      clients.</t>
     </abstract>
 
     <note title="Requirements Language">
@@ -80,8 +79,29 @@
 
   <middle>
     <section title="Introduction">
-      <t>CloudAudit is a HTTP based protocol that allows clients to audit
-      metadata relating to security by automated means.</t>
+      <t>CloudAudit is a HTTP based protocol that allows cloud computing
+      clients to audit metadata relating to security by automated means. The
+      first release is designed to be as simple as possible so as it can be
+      implemented by creating a directory structure and uploading files to a
+      standard web server that implements HTTP <xref target="RFC2616"></xref>.
+      Subsequent releases may add the ability to write definitions and
+      assertions, and to request new assertions be generated (e.g. a network
+      scan). That is, while 1.x versions are read-only, subsequent releases
+      may be read-write.</t>
+
+      <t>A client will typically interrogate the service and verify compliance
+      with local policy before making use of it. It may do so by checking
+      certain pre-defined parameters (for example, the geographical location
+      of the servers, compliance with prevailing security standards, etc.) or
+      it may enumerate some/all of the information available and present it to
+      an operator for a manual decision. This process may be fully automated,
+      for example when searching for least cost services or for an alternative
+      service for failover.</t>
+
+      <t>As it is impossible to tell in advance what information will be of
+      interest to clients and what service providers will be willing to
+      expose, a safely extensible mechanism has been devised which allows any
+      domain name owner to publish both definitions and assertions.</t>
     </section>
 
     <section title="Notational Conventions">
@@ -97,26 +117,16 @@
       target="RFC3986"></xref>: URI.</t>
     </section>
 
-    <section title="Namespace">
-      <t>CloudAudit relies on the DNS to divide the assertion and glossary
-      namespaces in an extensible fashion without registries.</t>
-
-      <t>The DNS name (e.g. cloud.example.com) is broken into its components
-      (e.g. cloud, example, com), reversed (e.g. com, example, cloud) and
-      recombined to create a path (e.g. com/example/cloud).</t>
-
-      <t>URI schemes and paths are NOT supported (e.g.
-      https://example.com/cloud), however it is possible to advertise an
-      alternative (e.g. cloud.example.com) via the HTTP Link header and/or
-      HTML LINK element (<xref target="discovery"></xref>).</t>
-    </section>
-
     <section anchor="discovery" title="Discovery">
-      <t>Clients MAY detect support for CloudAudit via a successful HTTP GET
-      or HEAD for the URL /.well-known/cloudaudit.</t>
+      <t>Clients SHOULD detect support for CloudAudit via a successful HTTP
+      GET or HEAD for the URL /.well-known/cloudaudit. If clients do not
+      confirm the existence of a CloudAudit repository then they may be
+      susceptible to false negatives (that is, falsely assuming an assertion
+      is absent when in fact the entire repository is absent).</t>
 
       <t>Servers MAY specify a remote CloudAudit service in the HTTP Link:
-      header and/or HTML LINK element with rel="cloudaudit".</t>
+      header and/or HTML LINK element with rel="cloudaudit". This allows a
+      single CloudAudit server to answers requests for multiple services.</t>
     </section>
 
     <section title="Enumeration">
@@ -125,67 +135,131 @@
       attribute containing the relative URL of the child. This response MAY be
       HyperText Markup Language (HTML). Clients MUST NOT rely on this
       functionality.</t>
+
+      <t>This format was selected because most popular web servers include
+      functionality for generating "fancy indexes", thereby supporting this
+      functionality "out of the box".</t>
     </section>
 
-    <section title="Assertions">
-      <t>Assertions can be made about the local service and/or remote
-      service(s).</t>
+    <section title="Namespaces">
+      <t>CloudAudit defines two namespaces; the glossary namespace which
+      contains definitions and the service namespace which contains
+      assertions. It relies on the Domain Name Service (DNS) to divide the
+      glossary and service namespaces in an extensible fashion without relying
+      on registries.</t>
 
-      <section title="Local Assertions">
-        <t></t>
+      <t>A domain name (e.g. example.com) under the control of the party is
+      broken into its components (e.g. example, com), reversed (e.g. com,
+      example) and recombined (e.g. com.example). That party "owns" this
+      namespace so long as the domain is registered to them and they may
+      subdivide it with components in order to reference and/or categorise
+      glossary definitions and service assertions. These MAY or MAY NOT
+      represent valid hosts in the DNS.</t>
+
+      <t>URI schemes and paths are NOT supported (e.g.
+      https://example.com/cloud), however it is possible for a service to
+      advertise an alternate name (e.g. cloud.example.com) via the HTTP Link
+      header and/or HTML LINK element (<xref target="discovery"></xref>).</t>
+
+      <section title="Glossary namespace">
+        <t>The glossary allows clients to enumerate and/or resolve
+        definitions, and to obtain additional documentation. Servers MUST
+        provide a plain text representation and MAY provide alternative
+        representations (such as HTML) via HTTP content negotiation.</t>
 
         <section title="Examples">
-          <t></t>
+          <t>The following shows client obtaining a definition for
+          org.iso.3166-1.</t>
 
           <figure>
-            <artwork><![CDATA[GET /.well-known/cloudaudit/1.0/assert/org/iso/3166-1 HTTP/1.1]]></artwork>
+            <artwork><![CDATA[< GET /.well-known/cloudaudit/service/org/iso/3166-1 HTTP/1.1
+< Host: iso.org
+< 
+> HTTP/1.1 200 OK
+> Content-Length: 24
+> Content-Type: text/plain
+> 
+> ISO 3166-1 Country Codes]]></artwork>
           </figure>
         </section>
       </section>
 
-      <section title="Remote Assertions">
-        <t>There are a number of scenarios where it is necessary to answer
-        CloudAudit queries on behalf of others, including:<list
-            style="symbols">
-            <t>Responding to queries on behalf of multiple servers</t>
+      <section title="Service namespace">
+        <t>Assertions can be made about the local service and/or remote
+        service(s).</t>
 
-            <t>Responding to queries from multiple clients</t>
+        <section anchor="local-assertions" title="Local Assertions">
+          <t>Local assertions refer to the service(s) sharing the same URL
+          end-point as the CloudAudit repository. They can be identified by
+          the absence of a '/-/' component in the URL (which is used as a
+          delineator for Remote Assertions <xref
+          target="remote-assertions"></xref>) and can normally be implemented
+          using symbolic links or web server configuration.</t>
 
-            <t>Proxying in order to supplement or override assertions</t>
+          <section title="Examples">
+            <t>This example shows a client retrieving the ISO 3166-1 country
+            code(s) from which the cloud.example.com service is being
+            provided.</t>
 
-            <t>Incompatibilities with existing systems and software that
-            prevents co-location</t>
-          </list></t>
-
-        <t>Remote assertions are supported by embedding both the name (e.g.
-        cloud.example.com) and the assertion queried (e.g. 3166-1.iso.org) in
-        the URL. The name and assertion MUST be delineated with a '/-/' URL
-        component as they may vary in length.</t>
-
-        <section title="Examples">
-          <t>This example shows a remote query on behalf of cloud.example.com
-          for the 3166-1.iso.org assertion.</t>
-
-          <figure>
-            <artwork><![CDATA[GET /.well-known/cloudaudit/1.0/assert/com/example/cloud/-/org/iso/3166-1 HTTP/1.1]]></artwork>
-          </figure>
+            <figure>
+              <artwork><![CDATA[< GET /.well-known/cloudaudit/service/org/iso/3166-1 HTTP/1.1
+< Host: iso.org
+< 
+> HTTP/1.1 200 OK
+> Content-Length: 3
+> Content-Type: text/plain
+> 
+> US]]></artwork>
+            </figure>
+          </section>
         </section>
-      </section>
-    </section>
 
-    <section title="Glossary">
-      <t>The glossary allows clients to enumerate or resolve and obtain
-      documentation for each assertion type. Servers MUST provide a HTML
-      representation and MAY provide alternative representations via HTTP
-      content negotiation.</t>
+        <section anchor="remote-assertions" title="Remote Assertions">
+          <t>There are a number of scenarios where it is necessary to answer
+          CloudAudit queries on behalf of others, including:<list
+              style="symbols">
+              <t>Responding to queries on behalf of multiple servers</t>
 
-      <section title="Examples">
-        <t>The following shows a query for the 3166-1.iso.org assertion
-        type.</t>
+              <t>Responding to queries from multiple clients</t>
 
-        <figure>
-          <artwork><![CDATA[GET /.well-known/cloudaudit/1.0/glossary/org/iso/3166-1 HTTP/1.1]]></artwork>
-        </figure>
+              <t>Proxying in order to supplement or override assertions</t>
+
+              <t>Incompatibilities with existing systems and software that
+              prevents co-location</t>
+            </list></t>
+
+          <t>Remote assertions are supported by embedding both the name (e.g.
+          cloud.example.com) and the assertion queried (e.g. 3166-1.iso.org)
+          in the URL. The name and assertion MUST be delineated with a '/-/'
+          URL component as they may vary in length.</t>
+
+          <section title="Examples">
+            <t>This example shows a client retrieving the ISO 3166-1 country
+            code(s) from which the cloud.example.com service is being
+            provided, from the remote server cloudaudit.net.</t>
+
+            <figure>
+              <artwork><![CDATA[< GET /.well-known/cloudaudit/service/com/example/cloud/-/org/iso/3166-1 HTTP/1.1
+< Host: cloudaudit.net
+< 
+> HTTP/1.1 200 OK
+> Content-Length: 3
+> Content-Type: text/plain
+> 
+> US]]></artwork>
+            </figure>
+          </section>
+        </section>
+
+        <section title="Third-party Assertions">
+          <t>It may be necessary for third-parties to make assertions, for
+          example where an auditor certifies compliance with a given standard
+          at a given time. This can be achieved either by retrieving a trusted
+          representation (for example, an image containing a physical
+          signature, or a digitally signed document) from the first-party or
+          by being redirected to a third-party and retrieving the assertion
+          directly from them.</t>
+        </section>
       </section>
     </section>
 
@@ -203,8 +277,31 @@
 
     <section title="Security Considerations">
       <t>The content of CloudAudit repositories MAY NOT be secure, private or
-      integrity-guaranteed, and due caution should be exercised when using
-      them.</t>
+      integrity-guaranteed, and due caution should be exercised. Clients
+      SHOULD use Transport Layer Security (TLS) <xref target="RFC5246"></xref>
+      or equivalent to ensure confidentiality and integrity when accessing
+      CloudAudit repositories over a public network such as the Internet.</t>
+
+      <t>The Domain Name System (DNS) MAY be susceptible to attacks and care
+      should be taken to authenticate servers, for example by verifying the
+      chain of trust and infromation contained in SSL certificates provided,
+      by using a Virtual Private Network (VPN) service, by relying on DNSSEC
+      <xref target="RFC4033"></xref>, etc.</t>
+
+      <t>Malicious clients MAY seek to obtain sensitive information via
+      CloudAudit which could then be used to launch an attack. Such
+      information should only be made available to authorised clients who have
+      been authenticated via HTTP authentication <xref
+      target="RFC2617"></xref> or equivalent.</t>
+
+      <t>Servers may make false first-party assertions or may refer to
+      third-party assertions that do not apply to them, or that expand the
+      scope of the intended meaning. Clients that do not trust servers may
+      choose only to rely on trusted third-party assertions, in which case the
+      integrity of the assertion SHOULD be verified by transferring it over
+      Transport Layer Security (TLS) <xref target="RFC5246"></xref> or
+      equivalent or by verifying a digital signature applied to the assertion
+      using OpenPGP <xref target="RFC4880"></xref> or equivalent</t>
     </section>
 
     <section anchor="Acknowledgements" title="Acknowledgements">
@@ -219,7 +316,15 @@
 
       <?rfc include="reference.RFC.2616"?>
 
+      <?rfc include="reference.RFC.2617"?>
+
       <?rfc include="reference.RFC.3986"?>
+
+      <?rfc include="reference.RFC.4033"?>
+
+      <?rfc include="reference.RFC.4880"?>
+
+      <?rfc include="reference.RFC.5246"?>
 
       <?rfc include="reference.W3C.REC-html401-19991224"?>
     </references>
@@ -231,7 +336,7 @@
           <t>Assertion Name: org.iso.3166-1</t>
 
           <t>Description: Codes for the representation of names of countries
-          and their subdivisions -- Part 1: Country codes </t>
+          and their subdivisions -- Part 1: Country codes</t>
 
           <t>Reference: http://www.iso.org/iso/iso-3166-1_decoding_table</t>
         </list></t>
