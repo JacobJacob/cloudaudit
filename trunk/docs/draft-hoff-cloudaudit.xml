@@ -60,46 +60,18 @@
     </author>
 
     <author fullname="George Reese" initials="G." surname="Reese">
-      <organization>Google</organization>
+      <organization>enStratus</organization>
 
       <address>
-        <postal>
-          <street>Brandschenkestrasse 110</street>
-
-          <city>Zurich</city>
-
-          <region></region>
-
-          <code>8002</code>
-
-          <country>Switzerland</country>
-        </postal>
-
-        <phone>+41 44 668 18 00&#8206;</phone>
-
-        <email>sjj@google.com</email>
+        <email>george.reese@enstratus.com</email>
       </address>
     </author>
 
     <author fullname="Ben Sapiro" initials="B." surname="Sapiro">
-      <organization>Google</organization>
+      <organization>TELUS Security Labs</organization>
 
       <address>
-        <postal>
-          <street>Brandschenkestrasse 110</street>
-
-          <city>Zurich</city>
-
-          <region></region>
-
-          <code>8002</code>
-
-          <country>Switzerland</country>
-        </postal>
-
-        <phone>+41 44 668 18 00&#8206;</phone>
-
-        <email>sjj@google.com</email>
+        <email>ben@sapiro.net</email>
       </address>
     </author>
 
