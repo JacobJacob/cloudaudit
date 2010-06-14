@@ -59,7 +59,51 @@
       </address>
     </author>
 
-    <date day="9" month="March" year="2010" />
+    <author fullname="George Reese" initials="G." surname="Reese">
+      <organization>Google</organization>
+
+      <address>
+        <postal>
+          <street>Brandschenkestrasse 110</street>
+
+          <city>Zurich</city>
+
+          <region></region>
+
+          <code>8002</code>
+
+          <country>Switzerland</country>
+        </postal>
+
+        <phone>+41 44 668 18 00&#8206;</phone>
+
+        <email>sjj@google.com</email>
+      </address>
+    </author>
+
+    <author fullname="Ben Sapiro" initials="B." surname="Sapiro">
+      <organization>Google</organization>
+
+      <address>
+        <postal>
+          <street>Brandschenkestrasse 110</street>
+
+          <city>Zurich</city>
+
+          <region></region>
+
+          <code>8002</code>
+
+          <country>Switzerland</country>
+        </postal>
+
+        <phone>+41 44 668 18 00&#8206;</phone>
+
+        <email>sjj@google.com</email>
+      </address>
+    </author>
+
+    <date day="14" month="June" year="2010" />
 
     <abstract>
       <t>CloudAudit (A6) provides an open, extensible and secure interface
