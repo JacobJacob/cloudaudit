@@ -4,11 +4,16 @@
 Network Working Group                                            C. Hoff
 Internet-Draft                                             Cisco Systems
 Intended status: Experimental                                S. Johnston
-Expires: September 10, 2010                                       Google
-                                                           March 9, 2010
+Expires: December 16, 2010                                        Google
+                                                                G. Reese
+                                                               enStratus
+                                                               B. Sapiro
+                                                     Telus Security Labs
+                                                           June 14, 2010
 
 
- CloudAudit - Automated Audit, Assertion, Assessment, and Assurance API
+ CloudAudit 1.0 - Automated Audit, Assertion, Assessment, and Assurance
+                                  API
                         draft-hoff-cloudaudit-00
 
 Abstract
@@ -27,34 +32,29 @@ Requirements Language
 
 Status of this Memo
 
-   This Internet-Draft is submitted to IETF in full conformance with the
+   This Internet-Draft is submitted in full conformance with the
    provisions of BCP 78 and BCP 79.
 
    Internet-Drafts are working documents of the Internet Engineering
-   Task Force (IETF), its areas, and its working groups.  Note that
-   other groups may also distribute working documents as Internet-
-   Drafts.
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at http://datatracker.ietf.org/drafts/current/.
 
    Internet-Drafts are draft documents valid for a maximum of six months
    and may be updated, replaced, or obsoleted by other documents at any
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   The list of current Internet-Drafts can be accessed at
-   http://www.ietf.org/ietf/1id-abstracts.txt.
-
-   The list of Internet-Draft Shadow Directories can be accessed at
-   http://www.ietf.org/shadow.html.
-
-   This Internet-Draft will expire on September 10, 2010.
+   This Internet-Draft will expire on December 16, 2010.
 
 Copyright Notice
 
 
 
-Hoff & Johnston        Expires September 10, 2010               [Page 1]
+
+Hoff, et al.            Expires December 16, 2010               [Page 1]
 
-Internet-Draft                 CloudAudit                     March 2010
+Internet-Draft                 CloudAudit                      June 2010
 
 
    Copyright (c) 2010 IETF Trust and the persons identified as the
@@ -68,7 +68,7 @@ Internet-Draft                 CloudAudit                     March 2010
    to this document.  Code Components extracted from this document must
    include Simplified BSD License text as described in Section 4.e of
    the Trust Legal Provisions and are provided without warranty as
-   described in the BSD License.
+   described in the Simplified BSD License.
 
 
 Table of Contents
@@ -79,14 +79,14 @@ Table of Contents
    4.  Enumeration . . . . . . . . . . . . . . . . . . . . . . . . . . 4
    5.  Namespaces  . . . . . . . . . . . . . . . . . . . . . . . . . . 4
      5.1.  Glossary namespace  . . . . . . . . . . . . . . . . . . . . 4
-       5.1.1.  Examples  . . . . . . . . . . . . . . . . . . . . . . . 5
+       5.1.1.  Examples  . . . . . . . . . . . . . . . . . . . . . . . 4
      5.2.  Service namespace . . . . . . . . . . . . . . . . . . . . . 5
        5.2.1.  Local Assertions  . . . . . . . . . . . . . . . . . . . 5
        5.2.2.  Remote Assertions . . . . . . . . . . . . . . . . . . . 5
        5.2.3.  Third-party Assertions  . . . . . . . . . . . . . . . . 6
    6.  Digital Signatures  . . . . . . . . . . . . . . . . . . . . . . 6
    7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . . . 6
-   8.  Security Considerations . . . . . . . . . . . . . . . . . . . . 7
+   8.  Security Considerations . . . . . . . . . . . . . . . . . . . . 6
    9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . 7
    10. References  . . . . . . . . . . . . . . . . . . . . . . . . . . 7
      10.1. Normative References  . . . . . . . . . . . . . . . . . . . 7
@@ -108,9 +108,9 @@ Table of Contents
 
 
 
-Hoff & Johnston        Expires September 10, 2010               [Page 2]
+Hoff, et al.            Expires December 16, 2010               [Page 2]
 
-Internet-Draft                 CloudAudit                     March 2010
+Internet-Draft                 CloudAudit                      June 2010
 
 
 1.  Introduction
@@ -164,27 +164,24 @@ Internet-Draft                 CloudAudit                     March 2010
 
 
 
-Hoff & Johnston        Expires September 10, 2010               [Page 3]
+Hoff, et al.            Expires December 16, 2010               [Page 3]
 
-Internet-Draft                 CloudAudit                     March 2010
+Internet-Draft                 CloudAudit                      June 2010
 
 
    Servers MAY specify a remote CloudAudit service in the HTTP Link:
    header and/or HTML LINK element with rel="cloudaudit".  This allows a
-   single CloudAudit server to answers requests for multiple services.
+   single CloudAudit server to answers requests for multiple services
+   and/or for delegation to a remote/third-party server.
 
 
 4.  Enumeration
 
-   Servers SHOULD render a valid XML response to a HTTP request for a
-   directory, containing an A or LINK element for every child with a
-   HREF attribute containing the relative URL of the child.  This
-   response MAY be HyperText Markup Language (HTML).  Clients MUST NOT
-   rely on this functionality.
-
-   This format was selected because most popular web servers include
-   functionality for generating "fancy indexes", thereby supporting this
-   functionality "out of the box".
+   Servers MAY render a HyperText Markup Language (HTML) response to a
+   HTTP request for a directory containing an A or LINK element for
+   every child with a HREF attribute containing the relative URL of the
+   child.  Clients MUST NOT rely on this functionality, which will vary
+   from server to server.
 
 
 5.  Namespaces
@@ -215,20 +212,20 @@ Internet-Draft                 CloudAudit                     March 2010
    text representation and MAY provide alternative representations (such
    as HTML) via HTTP content negotiation.
 
-
-
-
-
-
-Hoff & Johnston        Expires September 10, 2010               [Page 4]
-
-Internet-Draft                 CloudAudit                     March 2010
-
-
 5.1.1.  Examples
 
    The following shows client obtaining a definition for org.iso.3166-1.
-   < GET /.well-known/cloudaudit/service/org/iso/3166-1 HTTP/1.1
+
+
+
+
+
+Hoff, et al.            Expires December 16, 2010               [Page 4]
+
+Internet-Draft                 CloudAudit                      June 2010
+
+
+   < GET /.well-known/cloudaudit/glossary/org/iso/3166-1 HTTP/1.1
    < Host: iso.org
    <
    > HTTP/1.1 200 OK
@@ -272,19 +269,17 @@ Internet-Draft                 CloudAudit                     March 2010
 
    o  Responding to queries from multiple clients
 
-
-
-
-
-Hoff & Johnston        Expires September 10, 2010               [Page 5]
-
-Internet-Draft                 CloudAudit                     March 2010
-
-
    o  Proxying in order to supplement or override assertions
 
    o  Incompatibilities with existing systems and software that prevents
       co-location
+
+
+
+Hoff, et al.            Expires December 16, 2010               [Page 5]
+
+Internet-Draft                 CloudAudit                      June 2010
+
 
    Remote assertions are supported by embedding both the name (e.g.
    cloud.example.com) and the assertion queried (e.g. 3166-1.iso.org) in
@@ -330,17 +325,18 @@ Internet-Draft                 CloudAudit                     March 2010
    RFC.
 
 
-
-
-Hoff & Johnston        Expires September 10, 2010               [Page 6]
-
-Internet-Draft                 CloudAudit                     March 2010
-
-
 8.  Security Considerations
 
    The content of CloudAudit repositories MAY NOT be secure, private or
    integrity-guaranteed, and due caution should be exercised.  Clients
+
+
+
+Hoff, et al.            Expires December 16, 2010               [Page 6]
+
+Internet-Draft                 CloudAudit                      June 2010
+
+
    SHOULD use Transport Layer Security (TLS) [RFC5246] or equivalent to
    ensure confidentiality and integrity when accessing CloudAudit
    repositories over a public network such as the Internet.
@@ -370,7 +366,10 @@ Internet-Draft                 CloudAudit                     March 2010
 9.  Acknowledgements
 
    The authors would like to acknowledge all members of the CloudAudit
-   Working Group as well as early adopters.
+   Working Group, editors of framework specification documents
+   (including Doug Barbin, Mike Versace, James Arlen and Dave Lewis),
+   the publishers of frameworks (including ISACA, HHS, ISO, NIST and
+   PCI) and early adopters of the standard.
 
 
 10.  References
@@ -385,15 +384,15 @@ Internet-Draft                 CloudAudit                     March 2010
               Transfer Protocol -- HTTP/1.1", RFC 2616, June 1999.
 
    [RFC2617]  Franks, J., Hallam-Baker, P., Hostetler, J., Lawrence, S.,
-
-
-
-Hoff & Johnston        Expires September 10, 2010               [Page 7]
-
-Internet-Draft                 CloudAudit                     March 2010
-
-
               Leach, P., Luotonen, A., and L. Stewart, "HTTP
+
+
+
+Hoff, et al.            Expires December 16, 2010               [Page 7]
+
+Internet-Draft                 CloudAudit                      June 2010
+
+
               Authentication: Basic and Digest Access Authentication",
               RFC 2617, June 1999.
 
@@ -412,7 +411,7 @@ Internet-Draft                 CloudAudit                     March 2010
               (TLS) Protocol Version 1.2", RFC 5246, August 2008.
 
    [W3C.REC-html401-19991224]
-              Hors, A., Jacobs, I., and D. Raggett, "HTML 4.01
+              Hors, A., Raggett, D., and I. Jacobs, "HTML 4.01
               Specification", World Wide Web Consortium
               Recommendation REC-html401-19991224, December 1999,
               <http://www.w3.org/TR/1999/REC-html401-19991224>.
@@ -444,20 +443,22 @@ Appendix A.  Initial Registry Contents
 
 
 
-Hoff & Johnston        Expires September 10, 2010               [Page 8]
+
+Hoff, et al.            Expires December 16, 2010               [Page 8]
 
-Internet-Draft                 CloudAudit                     March 2010
+Internet-Draft                 CloudAudit                      June 2010
 
 
 Authors' Addresses
 
    Christofer Hoff
    Cisco Systems
-   125 High Street
-   Boston, MA  02110-2704
+   200 Beaver Brook Road
+   Building 200
+   Boxborough, MA  01719
    USA
 
-   Phone: +1 (617) 261 3700&#8206;
+   Phone: +1.9786310302
    Email: hoffc@cisco.com
 
 
@@ -467,8 +468,29 @@ Authors' Addresses
    Zurich,   8002
    Switzerland
 
-   Phone: +41 44 668 18 00&#8206;
-   Email: sjj@google.com
+   Phone: +41.446681679&#8206;
+   Email: sj@google.com
+
+
+   George Reese
+   enStratus
+   1201 Marquette Ave
+   Suite 150
+   Minneapolis, MN  55403
+   USA
+
+   Phone: +1.6127463091
+   Email: george.reese@enstratus.com
+
+
+   Ben Sapiro
+   Telus Security Labs
+   25 York Street
+   Toronto  M5J 2V5
+   Canada
+
+   Phone: +1.4166193220
+   Email: ben@sapiro.net
 
 
 
@@ -478,28 +500,6 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Hoff & Johnston        Expires September 10, 2010               [Page 9]
+Hoff, et al.            Expires December 16, 2010               [Page 9]
 
 

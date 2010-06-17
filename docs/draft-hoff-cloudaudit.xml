@@ -12,7 +12,7 @@
 <?rfc subcompact="no"?>
 <rfc category="exp" docName="draft-hoff-cloudaudit-00" ipr="trust200902">
   <front>
-    <title abbrev="CloudAudit">CloudAudit - Automated Audit, Assertion,
+    <title abbrev="CloudAudit">CloudAudit 1.0 - Automated Audit, Assertion,
     Assessment, and Assurance API</title>
 
     <author fullname="Christofer Hoff" initials="C." surname="Hoff">
@@ -20,18 +20,20 @@
 
       <address>
         <postal>
-          <street>125 High Street</street>
+          <street>200 Beaver Brook Road</street>
 
-          <city>Boston</city>
+          <street>Building 200</street>
 
-          <code>02110-2704</code>
+          <city>Boxborough</city>
+
+          <code>01719</code>
 
           <region>MA</region>
 
           <country>USA</country>
         </postal>
 
-        <phone>+1 (617) 261 3700&#8206;</phone>
+        <phone>+1.9786310302</phone>
 
         <email>hoffc@cisco.com</email>
       </address>
@@ -53,9 +55,9 @@
           <country>Switzerland</country>
         </postal>
 
-        <phone>+41 44 668 18 00&#8206;</phone>
+        <phone>+41.446681679&#8206;</phone>
 
-        <email>sjj@google.com</email>
+        <email>sj@google.com</email>
       </address>
     </author>
 
@@ -63,14 +65,42 @@
       <organization>enStratus</organization>
 
       <address>
+        <postal>
+          <street>1201 Marquette Ave</street>
+
+          <street>Suite 150</street>
+
+          <city>Minneapolis</city>
+
+          <region>MN</region>
+
+          <code>55403</code>
+
+          <country>USA</country>
+        </postal>
+
+        <phone>+1.6127463091</phone>
+
         <email>george.reese@enstratus.com</email>
       </address>
     </author>
 
     <author fullname="Ben Sapiro" initials="B." surname="Sapiro">
-      <organization>TELUS Security Labs</organization>
+      <organization>Telus Security Labs</organization>
 
       <address>
+        <postal>
+          <street>25 York Street</street>
+
+          <city>Toronto</city>
+
+          <code>M5J 2V5</code>
+
+          <country>Canada</country>
+        </postal>
+
+        <phone>+1.4166193220</phone>
+
         <email>ben@sapiro.net</email>
       </address>
     </author>
@@ -142,19 +172,16 @@
 
       <t>Servers MAY specify a remote CloudAudit service in the HTTP Link:
       header and/or HTML LINK element with rel="cloudaudit". This allows a
-      single CloudAudit server to answers requests for multiple services.</t>
+      single CloudAudit server to answers requests for multiple services
+      and/or for delegation to a remote/third-party server.</t>
     </section>
 
     <section title="Enumeration">
-      <t>Servers SHOULD render a valid XML response to a HTTP request for a
-      directory, containing an A or LINK element for every child with a HREF
-      attribute containing the relative URL of the child. This response MAY be
-      HyperText Markup Language (HTML). Clients MUST NOT rely on this
-      functionality.</t>
-
-      <t>This format was selected because most popular web servers include
-      functionality for generating "fancy indexes", thereby supporting this
-      functionality "out of the box".</t>
+      <t>Servers MAY render a HyperText Markup Language (HTML) response to a
+      HTTP request for a directory containing an A or LINK element for every
+      child with a HREF attribute containing the relative URL of the child.
+      Clients MUST NOT rely on this functionality, which will vary from server
+      to server.</t>
     </section>
 
     <section title="Namespaces">
@@ -188,7 +215,7 @@
           org.iso.3166-1.</t>
 
           <figure>
-            <artwork><![CDATA[< GET /.well-known/cloudaudit/service/org/iso/3166-1 HTTP/1.1
+            <artwork><![CDATA[< GET /.well-known/cloudaudit/glossary/org/iso/3166-1 HTTP/1.1
 < Host: iso.org
 < 
 > HTTP/1.1 200 OK
@@ -322,7 +349,10 @@
 
     <section anchor="Acknowledgements" title="Acknowledgements">
       <t>The authors would like to acknowledge all members of the CloudAudit
-      Working Group as well as early adopters.</t>
+      Working Group, editors of framework specification documents (including
+      Doug Barbin, Mike Versace, James Arlen and Dave Lewis), the publishers
+      of frameworks (including ISACA, HHS, ISO, NIST and PCI) and early
+      adopters of the standard.</t>
     </section>
   </middle>
 
