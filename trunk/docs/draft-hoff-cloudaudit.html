@@ -1,10 +1,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en"><head><title>CloudAudit - Automated Audit, Assertion,
+<html lang="en"><head><title>CloudAudit 1.0 - Automated Audit, Assertion,
     Assessment, and Assurance API</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="CloudAudit - Automated Audit, Assertion,
+<meta name="description" content="CloudAudit 1.0 - Automated Audit, Assertion,
     Assessment, and Assurance API">
-<meta name="generator" content="xml2rfc v1.34 (http://xml.resource.org/)">
+<meta name="generator" content="xml2rfc v1.35 (http://xml.resource.org/)">
 <style type='text/css'><!--
         body {
                 font-family: verdana, charcoal, helvetica, arial, sans-serif;
@@ -146,10 +146,14 @@
 <tr><td class="header">Network Working Group</td><td class="header">C. Hoff</td></tr>
 <tr><td class="header">Internet-Draft</td><td class="header">Cisco Systems</td></tr>
 <tr><td class="header">Intended status: Experimental</td><td class="header">S. Johnston</td></tr>
-<tr><td class="header">Expires: September 10, 2010</td><td class="header">Google</td></tr>
-<tr><td class="header">&nbsp;</td><td class="header">March 9, 2010</td></tr>
+<tr><td class="header">Expires: December 16, 2010</td><td class="header">Google</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">G. Reese</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">enStratus</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">B. Sapiro</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">Telus Security Labs</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">June 14, 2010</td></tr>
 </table></td></tr></table>
-<h1><br />CloudAudit - Automated Audit, Assertion,
+<h1><br />CloudAudit 1.0 - Automated Audit, Assertion,
     Assessment, and Assurance API<br />draft-hoff-cloudaudit-00</h1>
 
 <h3>Abstract</h3>
@@ -168,26 +172,20 @@
 </p>
 <h3>Status of this Memo</h3>
 <p>
-This Internet-Draft is submitted to IETF in full
+This Internet-Draft is submitted  in full
 conformance with the provisions of BCP&nbsp;78 and BCP&nbsp;79.</p>
 <p>
 Internet-Drafts are working documents of the Internet Engineering
-Task Force (IETF), its areas, and its working groups.
-Note that other groups may also distribute working documents as
-Internet-Drafts.</p>
+Task Force (IETF).  Note that other groups may also distribute
+working documents as Internet-Drafts.  The list of current
+Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>
 Internet-Drafts are draft documents valid for a maximum of six months
 and may be updated, replaced, or obsoleted by other documents at any time.
 It is inappropriate to use Internet-Drafts as reference material or to cite
 them other than as &ldquo;work in progress.&rdquo;</p>
 <p>
-The list of current Internet-Drafts can be accessed at
-<a href='http://www.ietf.org/ietf/1id-abstracts.txt'>http://www.ietf.org/ietf/1id-abstracts.txt</a>.</p>
-<p>
-The list of Internet-Draft Shadow Directories can be accessed at
-<a href='http://www.ietf.org/shadow.html'>http://www.ietf.org/shadow.html</a>.</p>
-<p>
-This Internet-Draft will expire on September 10, 2010.</p>
+This Internet-Draft will expire on December 16, 2010.</p>
 
 <h3>Copyright Notice</h3>
 <p>
@@ -195,10 +193,14 @@ Copyright (c) 2010 IETF Trust and the persons identified as the
 document authors.  All rights reserved.</p>
 <p>
 This document is subject to BCP 78 and the IETF Trust's Legal
-Provisions Relating to IETF Documents in effect on the date of
-publication of this document (http://trustee.ietf.org/license-info).
-Please review these documents carefully, as they describe your
-rights and restrictions with respect to this document.</p>
+Provisions Relating to IETF Documents
+(http://trustee.ietf.org/license-info) in effect on the date of
+publication of this document.  Please review these documents
+carefully, as they describe your rights and restrictions with respect
+to this document. Code Components extracted from this document must
+include Simplified BSD License text as described in Section 4.e of
+the Trust Legal Provisions and are provided without warranty as
+described in the Simplified BSD License.</p>
 <a name="toc"></a><br /><hr />
 <h3>Table of Contents</h3>
 <p class="toc">
@@ -301,22 +303,19 @@ Discovery</h3>
 </p>
 <p>Servers MAY specify a remote CloudAudit service in the HTTP Link:
       header and/or HTML LINK element with rel="cloudaudit". This allows a
-      single CloudAudit server to answers requests for multiple services.
+      single CloudAudit server to answers requests for multiple services
+      and/or for delegation to a remote/third-party server.
 </p>
 <a name="anchor3"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.4"></a><h3>4.&nbsp;
 Enumeration</h3>
 
-<p>Servers SHOULD render a valid XML response to a HTTP request for a
-      directory, containing an A or LINK element for every child with a HREF
-      attribute containing the relative URL of the child. This response MAY be
-      HyperText Markup Language (HTML). Clients MUST NOT rely on this
-      functionality.
-</p>
-<p>This format was selected because most popular web servers include
-      functionality for generating "fancy indexes", thereby supporting this
-      functionality "out of the box".
+<p>Servers MAY render a HyperText Markup Language (HTML) response to a
+      HTTP request for a directory containing an A or LINK element for every
+      child with a HREF attribute containing the relative URL of the child.
+      Clients MUST NOT rely on this functionality, which will vary from server
+      to server.
 </p>
 <a name="anchor4"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -359,7 +358,7 @@ Examples</h3>
 
 <p>The following shows client obtaining a definition for
           org.iso.3166-1.
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>&lt; GET /.well-known/cloudaudit/service/org/iso/3166-1 HTTP/1.1
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>&lt; GET /.well-known/cloudaudit/glossary/org/iso/3166-1 HTTP/1.1
 &lt; Host: iso.org
 &lt;
 &gt; HTTP/1.1 200 OK
@@ -510,7 +509,10 @@ Security Considerations</h3>
 Acknowledgements</h3>
 
 <p>The authors would like to acknowledge all members of the CloudAudit
-      Working Group as well as early adopters.
+      Working Group, editors of framework specification documents (including
+      Doug Barbin, Mike Versace, James Arlen and Dave Lewis), the publishers
+      of frameworks (including ISACA, HHS, ISO, NIST and PCI) and early
+      adopters of the standard.
 </p>
 <a name="rfc.references"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -522,21 +524,21 @@ References</h3>
 <h3>10.1.&nbsp;Normative References</h3>
 <table width="99%" border="0">
 <tr><td class="author-text" valign="top"><a name="RFC2119">[RFC2119]</a></td>
-<td class="author-text"><a href="mailto:sob@harvard.edu">Bradner, S.</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>,&rdquo; BCP&nbsp;14, RFC&nbsp;2119, March&nbsp;1997 (<a href="ftp://ftp.isi.edu/in-notes/rfc2119.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2119.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2119.xml">XML</a>).</td></tr>
+<td class="author-text"><a href="mailto:sob@harvard.edu">Bradner, S.</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>,&rdquo; BCP&nbsp;14, RFC&nbsp;2119, March&nbsp;1997 (<a href="http://www.rfc-editor.org/rfc/rfc2119.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2119.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2119.xml">XML</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="RFC2616">[RFC2616]</a></td>
-<td class="author-text"><a href="mailto:fielding@ics.uci.edu">Fielding, R.</a>, <a href="mailto:jg@w3.org">Gettys, J.</a>, <a href="mailto:mogul@wrl.dec.com">Mogul, J.</a>, <a href="mailto:frystyk@w3.org">Frystyk, H.</a>, <a href="mailto:masinter@parc.xerox.com">Masinter, L.</a>, <a href="mailto:paulle@microsoft.com">Leach, P.</a>, and <a href="mailto:timbl@w3.org">T. Berners-Lee</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2616">Hypertext Transfer Protocol -- HTTP/1.1</a>,&rdquo; RFC&nbsp;2616, June&nbsp;1999 (<a href="ftp://ftp.isi.edu/in-notes/rfc2616.txt">TXT</a>, <a href="ftp://ftp.isi.edu/in-notes/rfc2616.ps">PS</a>, <a href="ftp://ftp.isi.edu/in-notes/rfc2616.pdf">PDF</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2616.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2616.xml">XML</a>).</td></tr>
+<td class="author-text"><a href="mailto:fielding@ics.uci.edu">Fielding, R.</a>, <a href="mailto:jg@w3.org">Gettys, J.</a>, <a href="mailto:mogul@wrl.dec.com">Mogul, J.</a>, <a href="mailto:frystyk@w3.org">Frystyk, H.</a>, <a href="mailto:masinter@parc.xerox.com">Masinter, L.</a>, <a href="mailto:paulle@microsoft.com">Leach, P.</a>, and <a href="mailto:timbl@w3.org">T. Berners-Lee</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2616">Hypertext Transfer Protocol -- HTTP/1.1</a>,&rdquo; RFC&nbsp;2616, June&nbsp;1999 (<a href="http://www.rfc-editor.org/rfc/rfc2616.txt">TXT</a>, <a href="http://www.rfc-editor.org/rfc/rfc2616.ps">PS</a>, <a href="http://www.rfc-editor.org/rfc/rfc2616.pdf">PDF</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2616.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2616.xml">XML</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="RFC2617">[RFC2617]</a></td>
-<td class="author-text"><a href="mailto:john@math.nwu.edu">Franks, J.</a>, <a href="mailto:pbaker@verisign.com">Hallam-Baker, P.</a>, <a href="mailto:jeff@AbiSource.com">Hostetler, J.</a>, <a href="mailto:lawrence@agranat.com">Lawrence, S.</a>, <a href="mailto:paulle@microsoft.com">Leach, P.</a>, Luotonen, A., and <a href="mailto:stewart@OpenMarket.com">L. Stewart</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2617">HTTP Authentication: Basic and Digest Access Authentication</a>,&rdquo; RFC&nbsp;2617, June&nbsp;1999 (<a href="ftp://ftp.isi.edu/in-notes/rfc2617.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2617.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2617.xml">XML</a>).</td></tr>
+<td class="author-text"><a href="mailto:john@math.nwu.edu">Franks, J.</a>, <a href="mailto:pbaker@verisign.com">Hallam-Baker, P.</a>, <a href="mailto:jeff@AbiSource.com">Hostetler, J.</a>, <a href="mailto:lawrence@agranat.com">Lawrence, S.</a>, <a href="mailto:paulle@microsoft.com">Leach, P.</a>, Luotonen, A., and <a href="mailto:stewart@OpenMarket.com">L. Stewart</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2617">HTTP Authentication: Basic and Digest Access Authentication</a>,&rdquo; RFC&nbsp;2617, June&nbsp;1999 (<a href="http://www.rfc-editor.org/rfc/rfc2617.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2617.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2617.xml">XML</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="RFC3986">[RFC3986]</a></td>
-<td class="author-text"><a href="mailto:timbl@w3.org">Berners-Lee, T.</a>, <a href="mailto:fielding@gbiv.com">Fielding, R.</a>, and <a href="mailto:LMM@acm.org">L. Masinter</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc3986">Uniform Resource Identifier (URI): Generic Syntax</a>,&rdquo; STD&nbsp;66, RFC&nbsp;3986, January&nbsp;2005 (<a href="ftp://ftp.isi.edu/in-notes/rfc3986.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc3986.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc3986.xml">XML</a>).</td></tr>
+<td class="author-text"><a href="mailto:timbl@w3.org">Berners-Lee, T.</a>, <a href="mailto:fielding@gbiv.com">Fielding, R.</a>, and <a href="mailto:LMM@acm.org">L. Masinter</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc3986">Uniform Resource Identifier (URI): Generic Syntax</a>,&rdquo; STD&nbsp;66, RFC&nbsp;3986, January&nbsp;2005 (<a href="http://www.rfc-editor.org/rfc/rfc3986.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc3986.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc3986.xml">XML</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="RFC4033">[RFC4033]</a></td>
-<td class="author-text">Arends, R., Austein, R., Larson, M., Massey, D., and S. Rose, &ldquo;<a href="http://tools.ietf.org/html/rfc4033">DNS Security Introduction and Requirements</a>,&rdquo; RFC&nbsp;4033, March&nbsp;2005 (<a href="ftp://ftp.rfc-editor.org/in-notes/rfc4033.txt">TXT</a>).</td></tr>
+<td class="author-text">Arends, R., Austein, R., Larson, M., Massey, D., and S. Rose, &ldquo;<a href="http://tools.ietf.org/html/rfc4033">DNS Security Introduction and Requirements</a>,&rdquo; RFC&nbsp;4033, March&nbsp;2005 (<a href="http://www.rfc-editor.org/rfc/rfc4033.txt">TXT</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="RFC4880">[RFC4880]</a></td>
-<td class="author-text">Callas, J., Donnerhacke, L., Finney, H., Shaw, D., and R. Thayer, &ldquo;<a href="http://tools.ietf.org/html/rfc4880">OpenPGP Message Format</a>,&rdquo; RFC&nbsp;4880, November&nbsp;2007 (<a href="ftp://ftp.rfc-editor.org/in-notes/rfc4880.txt">TXT</a>).</td></tr>
+<td class="author-text">Callas, J., Donnerhacke, L., Finney, H., Shaw, D., and R. Thayer, &ldquo;<a href="http://tools.ietf.org/html/rfc4880">OpenPGP Message Format</a>,&rdquo; RFC&nbsp;4880, November&nbsp;2007 (<a href="http://www.rfc-editor.org/rfc/rfc4880.txt">TXT</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="RFC5246">[RFC5246]</a></td>
-<td class="author-text">Dierks, T. and E. Rescorla, &ldquo;<a href="http://tools.ietf.org/html/rfc5246">The Transport Layer Security (TLS) Protocol Version 1.2</a>,&rdquo; RFC&nbsp;5246, August&nbsp;2008 (<a href="ftp://ftp.rfc-editor.org/in-notes/rfc5246.txt">TXT</a>).</td></tr>
+<td class="author-text">Dierks, T. and E. Rescorla, &ldquo;<a href="http://tools.ietf.org/html/rfc5246">The Transport Layer Security (TLS) Protocol Version 1.2</a>,&rdquo; RFC&nbsp;5246, August&nbsp;2008 (<a href="http://www.rfc-editor.org/rfc/rfc5246.txt">TXT</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="W3C.REC-html401-19991224">[W3C.REC-html401-19991224]</a></td>
-<td class="author-text">Hors, A., Jacobs, I., and D. Raggett, &ldquo;<a href="http://www.w3.org/TR/1999/REC-html401-19991224">HTML 4.01 Specification</a>,&rdquo; World Wide Web Consortium Recommendation&nbsp;REC-html401-19991224, December&nbsp;1999 (<a href="http://www.w3.org/TR/1999/REC-html401-19991224">HTML</a>).</td></tr>
+<td class="author-text">Hors, A., Raggett, D., and I. Jacobs, &ldquo;<a href="http://www.w3.org/TR/1999/REC-html401-19991224">HTML 4.01 Specification</a>,&rdquo; World Wide Web Consortium Recommendation&nbsp;REC-html401-19991224, December&nbsp;1999 (<a href="http://www.w3.org/TR/1999/REC-html401-19991224">HTML</a>).</td></tr>
 </table>
 
 <a name="rfc.references2"></a><br /><hr />
@@ -570,13 +572,15 @@ Initial Registry Contents</h3>
 <tr><td class="author-text">&nbsp;</td>
 <td class="author-text">Cisco Systems</td></tr>
 <tr><td class="author-text">&nbsp;</td>
-<td class="author-text">125 High Street</td></tr>
+<td class="author-text">200 Beaver Brook Road</td></tr>
 <tr><td class="author-text">&nbsp;</td>
-<td class="author-text">Boston, MA  02110-2704</td></tr>
+<td class="author-text">Building 200</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Boxborough, MA  01719</td></tr>
 <tr><td class="author-text">&nbsp;</td>
 <td class="author-text">USA</td></tr>
 <tr><td class="author" align="right">Phone:&nbsp;</td>
-<td class="author-text">+1 (617) 261 3700&#8206;</td></tr>
+<td class="author-text">+1.9786310302</td></tr>
 <tr><td class="author" align="right">Email:&nbsp;</td>
 <td class="author-text"><a href="mailto:hoffc@cisco.com">hoffc@cisco.com</a></td></tr>
 <tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
@@ -591,9 +595,41 @@ Initial Registry Contents</h3>
 <tr><td class="author-text">&nbsp;</td>
 <td class="author-text">Switzerland</td></tr>
 <tr><td class="author" align="right">Phone:&nbsp;</td>
-<td class="author-text">+41 44 668 18 00&#8206;</td></tr>
+<td class="author-text">+41.446681679&#8206;</td></tr>
 <tr><td class="author" align="right">Email:&nbsp;</td>
-<td class="author-text"><a href="mailto:sjj@google.com">sjj@google.com</a></td></tr>
+<td class="author-text"><a href="mailto:sj@google.com">sj@google.com</a></td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">George Reese</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">enStratus</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">1201 Marquette Ave</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Suite 150</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Minneapolis, MN  55403</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">USA</td></tr>
+<tr><td class="author" align="right">Phone:&nbsp;</td>
+<td class="author-text">+1.6127463091</td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:george.reese@enstratus.com">george.reese@enstratus.com</a></td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Ben Sapiro</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Telus Security Labs</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">25 York Street</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Toronto  M5J 2V5</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Canada</td></tr>
+<tr><td class="author" align="right">Phone:&nbsp;</td>
+<td class="author-text">+1.4166193220</td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:ben@sapiro.net">ben@sapiro.net</a></td></tr>
 </table>
 </body></html>
 
