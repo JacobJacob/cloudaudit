@@ -164,16 +164,38 @@
     </section>
 
     <section anchor="discovery" title="Discovery">
-      <t>Clients SHOULD detect support for CloudAudit via a successful HTTP
-      GET or HEAD for the URL /.well-known/cloudaudit. If clients do not
-      confirm the existence of a CloudAudit repository then they may be
-      susceptible to false negatives (that is, falsely assuming an assertion
-      is absent when in fact the entire repository is absent).</t>
+      <section title="Repository">
+        <t>Clients SHOULD detect support for CloudAudit by verifying that a
+        HTTP GET or HEAD for the repository root (e.g.
+        /.well-known/cloudaudit) is successful (e.g. "200 OK"). Clients MAY
+        also verify that requests for invalid URLs (e.g.
+        /.well-known/&lt;random&gt;) return an error (e.g. "404 Not
+        Found").</t>
 
-      <t>Servers MAY specify a remote CloudAudit service in the HTTP Link:
-      header and/or HTML LINK element with rel="cloudaudit". This allows a
-      single CloudAudit server to answers requests for multiple services
-      and/or for delegation to a remote/third-party server.</t>
+        <t>If clients do not confirm the existence of a CloudAudit repository
+        then they may be susceptible to false negatives (e.g. falsely assuming
+        an assertion is absent when in fact the entire repository is absent)
+        and if they do not confirm the absence of errors for invalid URLs then
+        they may be susceptible to false positives (e.g. falsely assuming an
+        assertion is present when in fact any assertion is present).</t>
+      </section>
+
+      <section title="Links">
+        <t>Servers MAY specify the root of a CloudAudit repository in the HTTP
+        Link: header and/or HTML LINK element with
+        rel="http://cloudaudit.org". This allows one or more services to
+        delgate requests to a single local or remote/third-party server.
+        Clients SHOULD check for the presence of these links before assuming
+        that there is a local CloudAudit repository.</t>
+
+        <figure title="HTML Discovery">
+          <artwork><![CDATA[<link rel="http://cloudaudit.org" href="http://example.com/.well-known/cloudaudit/com.example.ec2">]]></artwork>
+        </figure>
+
+        <figure title="HTTP Discovery">
+          <artwork><![CDATA[Link: <http://example.com/.well-known/cloudaudit/com.example.ec2>; rel="http://cloudaudit.org"]]></artwork>
+        </figure>
+      </section>
     </section>
 
     <section title="Enumeration">

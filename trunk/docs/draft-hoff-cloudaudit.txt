@@ -76,25 +76,25 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . . . 3
    2.  Notational Conventions  . . . . . . . . . . . . . . . . . . . . 3
    3.  Discovery . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+     3.1.  Repository  . . . . . . . . . . . . . . . . . . . . . . . . 3
+     3.2.  Links . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
    4.  Enumeration . . . . . . . . . . . . . . . . . . . . . . . . . . 4
    5.  Namespaces  . . . . . . . . . . . . . . . . . . . . . . . . . . 4
-     5.1.  Glossary namespace  . . . . . . . . . . . . . . . . . . . . 4
-       5.1.1.  Examples  . . . . . . . . . . . . . . . . . . . . . . . 4
+     5.1.  Glossary namespace  . . . . . . . . . . . . . . . . . . . . 5
+       5.1.1.  Examples  . . . . . . . . . . . . . . . . . . . . . . . 5
      5.2.  Service namespace . . . . . . . . . . . . . . . . . . . . . 5
        5.2.1.  Local Assertions  . . . . . . . . . . . . . . . . . . . 5
-       5.2.2.  Remote Assertions . . . . . . . . . . . . . . . . . . . 5
+       5.2.2.  Remote Assertions . . . . . . . . . . . . . . . . . . . 6
        5.2.3.  Third-party Assertions  . . . . . . . . . . . . . . . . 6
-   6.  Digital Signatures  . . . . . . . . . . . . . . . . . . . . . . 6
-   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . . . 6
-   8.  Security Considerations . . . . . . . . . . . . . . . . . . . . 6
-   9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . 7
-   10. References  . . . . . . . . . . . . . . . . . . . . . . . . . . 7
-     10.1. Normative References  . . . . . . . . . . . . . . . . . . . 7
-     10.2. Informative References  . . . . . . . . . . . . . . . . . . 8
-   Appendix A.  Initial Registry Contents  . . . . . . . . . . . . . . 8
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . . 8
-
-
+   6.  Digital Signatures  . . . . . . . . . . . . . . . . . . . . . . 7
+   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . . . 7
+   8.  Security Considerations . . . . . . . . . . . . . . . . . . . . 7
+   9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . 8
+   10. References  . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+     10.1. Normative References  . . . . . . . . . . . . . . . . . . . 8
+     10.2. Informative References  . . . . . . . . . . . . . . . . . . 9
+   Appendix A.  Initial Registry Contents  . . . . . . . . . . . . . . 9
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . . 9
 
 
 
@@ -155,12 +155,12 @@ Internet-Draft                 CloudAudit                      June 2010
 
 3.  Discovery
 
-   Clients SHOULD detect support for CloudAudit via a successful HTTP
-   GET or HEAD for the URL /.well-known/cloudaudit.  If clients do not
-   confirm the existence of a CloudAudit repository then they may be
-   susceptible to false negatives (that is, falsely assuming an
-   assertion is absent when in fact the entire repository is absent).
+3.1.  Repository
 
+   Clients SHOULD detect support for CloudAudit by verifying that a HTTP
+   GET or HEAD for the repository root (e.g. /.well-known/cloudaudit) is
+   successful (e.g. "200 OK").  Clients MAY also verify that requests
+   for invalid URLs (e.g. /.well-known/<random>) return an error (e.g.
 
 
 
@@ -169,10 +169,31 @@ Hoff, et al.            Expires December 16, 2010               [Page 3]
 Internet-Draft                 CloudAudit                      June 2010
 
 
-   Servers MAY specify a remote CloudAudit service in the HTTP Link:
-   header and/or HTML LINK element with rel="cloudaudit".  This allows a
-   single CloudAudit server to answers requests for multiple services
-   and/or for delegation to a remote/third-party server.
+   "404 Not Found").
+
+   If clients do not confirm the existence of a CloudAudit repository
+   then they may be susceptible to false negatives (e.g. falsely
+   assuming an assertion is absent when in fact the entire repository is
+   absent) and if they do not confirm the absence of errors for invalid
+   URLs then they may be susceptible to false positives (e.g. falsely
+   assuming an assertion is present when in fact any assertion is
+   present).
+
+3.2.  Links
+
+   Servers MAY specify the root of a CloudAudit repository in the HTTP
+   Link: header and/or HTML LINK element with
+   rel="http://cloudaudit.org".  This allows one or more services to
+   delgate requests to a single local or remote/third-party server.
+   Clients SHOULD check for the presence of these links before assuming
+   that there is a local CloudAudit repository.
+<link rel="http://cloudaudit.org" href="http://example.com/.well-known/cloudaudit/com.example.ec2">
+
+                              HTML Discovery
+
+Link: <http://example.com/.well-known/cloudaudit/com.example.ec2>; rel="http://cloudaudit.org"
+
+                              HTTP Discovery
 
 
 4.  Enumeration
@@ -196,6 +217,14 @@ Internet-Draft                 CloudAudit                      June 2010
    broken into its components (e.g. example, com), reversed (e.g. com,
    example) and recombined (e.g. com.example).  That party "owns" this
    namespace so long as the domain is registered to them and they may
+
+
+
+Hoff, et al.            Expires December 16, 2010               [Page 4]
+
+Internet-Draft                 CloudAudit                      June 2010
+
+
    subdivide it with components in order to reference and/or categorise
    glossary definitions and service assertions.  These MAY or MAY NOT
    represent valid hosts in the DNS.
@@ -215,16 +244,6 @@ Internet-Draft                 CloudAudit                      June 2010
 5.1.1.  Examples
 
    The following shows client obtaining a definition for org.iso.3166-1.
-
-
-
-
-
-Hoff, et al.            Expires December 16, 2010               [Page 4]
-
-Internet-Draft                 CloudAudit                      June 2010
-
-
    < GET /.well-known/cloudaudit/glossary/org/iso/3166-1 HTTP/1.1
    < Host: iso.org
    <
@@ -251,6 +270,17 @@ Internet-Draft                 CloudAudit                      June 2010
 
    This example shows a client retrieving the ISO 3166-1 country code(s)
    from which the cloud.example.com service is being provided.
+
+
+
+
+
+
+Hoff, et al.            Expires December 16, 2010               [Page 5]
+
+Internet-Draft                 CloudAudit                      June 2010
+
+
    < GET /.well-known/cloudaudit/service/org/iso/3166-1 HTTP/1.1
    < Host: iso.org
    <
@@ -273,13 +303,6 @@ Internet-Draft                 CloudAudit                      June 2010
 
    o  Incompatibilities with existing systems and software that prevents
       co-location
-
-
-
-Hoff, et al.            Expires December 16, 2010               [Page 5]
-
-Internet-Draft                 CloudAudit                      June 2010
-
 
    Remote assertions are supported by embedding both the name (e.g.
    cloud.example.com) and the assertion queried (e.g. 3166-1.iso.org) in
@@ -306,6 +329,14 @@ Internet-Draft                 CloudAudit                      June 2010
    where an auditor certifies compliance with a given standard at a
    given time.  This can be achieved either by retrieving a trusted
    representation (for example, an image containing a physical
+
+
+
+Hoff, et al.            Expires December 16, 2010               [Page 6]
+
+Internet-Draft                 CloudAudit                      June 2010
+
+
    signature, or a digitally signed document) from the first-party or by
    being redirected to a third-party and retrieving the assertion
    directly from them.
@@ -329,14 +360,6 @@ Internet-Draft                 CloudAudit                      June 2010
 
    The content of CloudAudit repositories MAY NOT be secure, private or
    integrity-guaranteed, and due caution should be exercised.  Clients
-
-
-
-Hoff, et al.            Expires December 16, 2010               [Page 6]
-
-Internet-Draft                 CloudAudit                      June 2010
-
-
    SHOULD use Transport Layer Security (TLS) [RFC5246] or equivalent to
    ensure confidentiality and integrity when accessing CloudAudit
    repositories over a public network such as the Internet.
@@ -363,6 +386,13 @@ Internet-Draft                 CloudAudit                      June 2010
    [RFC4880] or equivalent
 
 
+
+
+Hoff, et al.            Expires December 16, 2010               [Page 7]
+
+Internet-Draft                 CloudAudit                      June 2010
+
+
 9.  Acknowledgements
 
    The authors would like to acknowledge all members of the CloudAudit
@@ -385,14 +415,6 @@ Internet-Draft                 CloudAudit                      June 2010
 
    [RFC2617]  Franks, J., Hallam-Baker, P., Hostetler, J., Lawrence, S.,
               Leach, P., Luotonen, A., and L. Stewart, "HTTP
-
-
-
-Hoff, et al.            Expires December 16, 2010               [Page 7]
-
-Internet-Draft                 CloudAudit                      June 2010
-
-
               Authentication: Basic and Digest Access Authentication",
               RFC 2617, June 1999.
 
@@ -411,10 +433,21 @@ Internet-Draft                 CloudAudit                      June 2010
               (TLS) Protocol Version 1.2", RFC 5246, August 2008.
 
    [W3C.REC-html401-19991224]
-              Hors, A., Raggett, D., and I. Jacobs, "HTML 4.01
+              Hors, A., Jacobs, I., and D. Raggett, "HTML 4.01
               Specification", World Wide Web Consortium
               Recommendation REC-html401-19991224, December 1999,
               <http://www.w3.org/TR/1999/REC-html401-19991224>.
+
+
+
+
+
+
+
+Hoff, et al.            Expires December 16, 2010               [Page 8]
+
+Internet-Draft                 CloudAudit                      June 2010
+
 
 10.2.  Informative References
 
@@ -429,24 +462,6 @@ Appendix A.  Initial Registry Contents
       and their subdivisions -- Part 1: Country codes
 
    o  Reference: http://www.iso.org/iso/iso-3166-1_decoding_table
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Hoff, et al.            Expires December 16, 2010               [Page 8]
-
-Internet-Draft                 CloudAudit                      June 2010
 
 
 Authors' Addresses
@@ -483,6 +498,13 @@ Authors' Addresses
    Email: george.reese@enstratus.com
 
 
+
+
+Hoff, et al.            Expires December 16, 2010               [Page 9]
+
+Internet-Draft                 CloudAudit                      June 2010
+
+
    Ben Sapiro
    Telus Security Labs
    25 York Street
@@ -500,6 +522,40 @@ Authors' Addresses
 
 
 
-Hoff, et al.            Expires December 16, 2010               [Page 9]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hoff, et al.            Expires December 16, 2010              [Page 10]
 
 

@@ -210,27 +210,31 @@ Introduction<br />
 Notational Conventions<br />
 <a href="#discovery">3.</a>&nbsp;
 Discovery<br />
-<a href="#anchor3">4.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor3">3.1.</a>&nbsp;
+Repository<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor4">3.2.</a>&nbsp;
+Links<br />
+<a href="#anchor5">4.</a>&nbsp;
 Enumeration<br />
-<a href="#anchor4">5.</a>&nbsp;
+<a href="#anchor6">5.</a>&nbsp;
 Namespaces<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor5">5.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor7">5.1.</a>&nbsp;
 Glossary namespace<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor6">5.1.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor8">5.1.1.</a>&nbsp;
 Examples<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor7">5.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor9">5.2.</a>&nbsp;
 Service namespace<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#local-assertions">5.2.1.</a>&nbsp;
 Local Assertions<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#remote-assertions">5.2.2.</a>&nbsp;
 Remote Assertions<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor10">5.2.3.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor12">5.2.3.</a>&nbsp;
 Third-party Assertions<br />
-<a href="#anchor11">6.</a>&nbsp;
+<a href="#anchor13">6.</a>&nbsp;
 Digital Signatures<br />
 <a href="#IANA">7.</a>&nbsp;
 IANA Considerations<br />
-<a href="#anchor12">8.</a>&nbsp;
+<a href="#anchor14">8.</a>&nbsp;
 Security Considerations<br />
 <a href="#Acknowledgements">9.</a>&nbsp;
 Acknowledgements<br />
@@ -240,7 +244,7 @@ References<br />
 Normative References<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#rfc.references2">10.2.</a>&nbsp;
 Informative References<br />
-<a href="#anchor15">Appendix&nbsp;A.</a>&nbsp;
+<a href="#anchor17">Appendix&nbsp;A.</a>&nbsp;
 Initial Registry Contents<br />
 <a href="#rfc.authors">&#167;</a>&nbsp;
 Authors' Addresses<br />
@@ -295,18 +299,42 @@ Notational Conventions</h3>
 <a name="rfc.section.3"></a><h3>3.&nbsp;
 Discovery</h3>
 
-<p>Clients SHOULD detect support for CloudAudit via a successful HTTP
-      GET or HEAD for the URL /.well-known/cloudaudit. If clients do not
-      confirm the existence of a CloudAudit repository then they may be
-      susceptible to false negatives (that is, falsely assuming an assertion
-      is absent when in fact the entire repository is absent).
-</p>
-<p>Servers MAY specify a remote CloudAudit service in the HTTP Link:
-      header and/or HTML LINK element with rel="cloudaudit". This allows a
-      single CloudAudit server to answers requests for multiple services
-      and/or for delegation to a remote/third-party server.
-</p>
 <a name="anchor3"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.1"></a><h3>3.1.&nbsp;
+Repository</h3>
+
+<p>Clients SHOULD detect support for CloudAudit by verifying that a
+        HTTP GET or HEAD for the repository root (e.g.
+        /.well-known/cloudaudit) is successful (e.g. "200 OK"). Clients MAY
+        also verify that requests for invalid URLs (e.g.
+        /.well-known/&lt;random&gt;) return an error (e.g. "404 Not
+        Found").
+</p>
+<p>If clients do not confirm the existence of a CloudAudit repository
+        then they may be susceptible to false negatives (e.g. falsely assuming
+        an assertion is absent when in fact the entire repository is absent)
+        and if they do not confirm the absence of errors for invalid URLs then
+        they may be susceptible to false positives (e.g. falsely assuming an
+        assertion is present when in fact any assertion is present).
+</p>
+<a name="anchor4"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.2"></a><h3>3.2.&nbsp;
+Links</h3>
+
+<p>Servers MAY specify the root of a CloudAudit repository in the HTTP
+        Link: header and/or HTML LINK element with
+        rel="http://cloudaudit.org". This allows one or more services to
+        delgate requests to a single local or remote/third-party server.
+        Clients SHOULD check for the presence of these links before assuming
+        that there is a local CloudAudit repository.
+</p><br /><hr class="insert" />
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>&lt;link rel="http://cloudaudit.org" href="http://example.com/.well-known/cloudaudit/com.example.ec2"&gt;</pre></div><table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;HTML Discovery&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
+<br /><hr class="insert" />
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>Link: &lt;http://example.com/.well-known/cloudaudit/com.example.ec2&gt;; rel="http://cloudaudit.org"</pre></div><table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;HTTP Discovery&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
+
+<a name="anchor5"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.4"></a><h3>4.&nbsp;
 Enumeration</h3>
@@ -317,7 +345,7 @@ Enumeration</h3>
       Clients MUST NOT rely on this functionality, which will vary from server
       to server.
 </p>
-<a name="anchor4"></a><br /><hr />
+<a name="anchor6"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.5"></a><h3>5.&nbsp;
 Namespaces</h3>
@@ -341,7 +369,7 @@ Namespaces</h3>
       advertise an alternate name (e.g. cloud.example.com) via the HTTP Link
       header and/or HTML LINK element (<a class='info' href='#discovery'>Section&nbsp;3<span> (</span><span class='info'>Discovery</span><span>)</span></a>).
 </p>
-<a name="anchor5"></a><br /><hr />
+<a name="anchor7"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.5.1"></a><h3>5.1.&nbsp;
 Glossary namespace</h3>
@@ -351,7 +379,7 @@ Glossary namespace</h3>
         provide a plain text representation and MAY provide alternative
         representations (such as HTML) via HTTP content negotiation.
 </p>
-<a name="anchor6"></a><br /><hr />
+<a name="anchor8"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.5.1.1"></a><h3>5.1.1.&nbsp;
 Examples</h3>
@@ -366,7 +394,7 @@ Examples</h3>
 &gt; Content-Type: text/plain
 &gt;
 &gt; ISO 3166-1 Country Codes</pre></div>
-<a name="anchor7"></a><br /><hr />
+<a name="anchor9"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.5.2"></a><h3>5.2.&nbsp;
 Service namespace</h3>
@@ -385,7 +413,7 @@ Local Assertions</h3>
           delineator for Remote Assertions <a class='info' href='#remote-assertions'>Section&nbsp;5.2.2<span> (</span><span class='info'>Remote Assertions</span><span>)</span></a>) and can normally be implemented
           using symbolic links or web server configuration.
 </p>
-<a name="anchor8"></a><br /><hr />
+<a name="anchor10"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.5.2.1.1"></a><h3>5.2.1.1.&nbsp;
 Examples</h3>
@@ -425,7 +453,7 @@ Remote Assertions</h3>
           in the URL. The name and assertion MUST be delineated with a '/-/'
           URL component as they may vary in length.
 </p>
-<a name="anchor9"></a><br /><hr />
+<a name="anchor11"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.5.2.2.1"></a><h3>5.2.2.1.&nbsp;
 Examples</h3>
@@ -441,7 +469,7 @@ Examples</h3>
 &gt; Content-Type: text/plain
 &gt;
 &gt; US</pre></div>
-<a name="anchor10"></a><br /><hr />
+<a name="anchor12"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.5.2.3"></a><h3>5.2.3.&nbsp;
 Third-party Assertions</h3>
@@ -454,7 +482,7 @@ Third-party Assertions</h3>
           by being redirected to a third-party and retrieving the assertion
           directly from them.
 </p>
-<a name="anchor11"></a><br /><hr />
+<a name="anchor13"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6"></a><h3>6.&nbsp;
 Digital Signatures</h3>
@@ -472,7 +500,7 @@ IANA Considerations</h3>
 <p>Note to RFC Editor: this section may be removed on publication as an
       RFC.
 </p>
-<a name="anchor12"></a><br /><hr />
+<a name="anchor14"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.8"></a><h3>8.&nbsp;
 Security Considerations</h3>
@@ -538,7 +566,7 @@ References</h3>
 <tr><td class="author-text" valign="top"><a name="RFC5246">[RFC5246]</a></td>
 <td class="author-text">Dierks, T. and E. Rescorla, &ldquo;<a href="http://tools.ietf.org/html/rfc5246">The Transport Layer Security (TLS) Protocol Version 1.2</a>,&rdquo; RFC&nbsp;5246, August&nbsp;2008 (<a href="http://www.rfc-editor.org/rfc/rfc5246.txt">TXT</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="W3C.REC-html401-19991224">[W3C.REC-html401-19991224]</a></td>
-<td class="author-text">Hors, A., Raggett, D., and I. Jacobs, &ldquo;<a href="http://www.w3.org/TR/1999/REC-html401-19991224">HTML 4.01 Specification</a>,&rdquo; World Wide Web Consortium Recommendation&nbsp;REC-html401-19991224, December&nbsp;1999 (<a href="http://www.w3.org/TR/1999/REC-html401-19991224">HTML</a>).</td></tr>
+<td class="author-text">Hors, A., Jacobs, I., and D. Raggett, &ldquo;<a href="http://www.w3.org/TR/1999/REC-html401-19991224">HTML 4.01 Specification</a>,&rdquo; World Wide Web Consortium Recommendation&nbsp;REC-html401-19991224, December&nbsp;1999 (<a href="http://www.w3.org/TR/1999/REC-html401-19991224">HTML</a>).</td></tr>
 </table>
 
 <a name="rfc.references2"></a><br /><hr />
@@ -547,7 +575,7 @@ References</h3>
 <table width="99%" border="0">
 </table>
 
-<a name="anchor15"></a><br /><hr />
+<a name="anchor17"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.A"></a><h3>Appendix A.&nbsp;
 Initial Registry Contents</h3>
