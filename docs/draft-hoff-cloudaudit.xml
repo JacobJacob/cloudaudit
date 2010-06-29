@@ -86,7 +86,7 @@
     </author>
 
     <author fullname="Ben Sapiro" initials="B." surname="Sapiro">
-      <organization>Telus Security Labs</organization>
+      <organization abbrev="TELUS">TELUS Security Labs</organization>
 
       <address>
         <postal>
@@ -99,13 +99,13 @@
           <country>Canada</country>
         </postal>
 
-        <phone>+1.4166193220</phone>
+        <phone>+1.6478899432</phone>
 
         <email>ben@sapiro.net</email>
       </address>
     </author>
 
-    <date day="14" month="June" year="2010" />
+    <date day="28" month="June" year="2010" />
 
     <abstract>
       <t>CloudAudit (A6) provides an open, extensible and secure interface
@@ -233,11 +233,12 @@
         representations (such as HTML) via HTTP content negotiation.</t>
 
         <section title="Examples">
-          <t>The following shows client obtaining a definition for
-          org.iso.3166-1.</t>
+          <section title="Generic">
+            <t>The following shows a client obtaining a definition for
+            org.iso.3166-1.</t>
 
-          <figure>
-            <artwork><![CDATA[< GET /.well-known/cloudaudit/glossary/org/iso/3166-1 HTTP/1.1
+            <figure>
+              <artwork><![CDATA[< GET /.well-known/cloudaudit/glossary/org/iso/3166-1 HTTP/1.1
 < Host: iso.org
 < 
 > HTTP/1.1 200 OK
@@ -245,7 +246,24 @@
 > Content-Type: text/plain
 > 
 > ISO 3166-1 Country Codes]]></artwork>
-          </figure>
+            </figure>
+          </section>
+
+          <section title="Compliance">
+            <t>The following shows a client obtaining a defintion for
+            gov.nist.crc.sp800-53.r2.</t>
+
+            <figure>
+              <artwork><![CDATA[< GET /.well-known/cloudaudit/glossary/gov/nist/crc/sp800-53/r2 HTTP/1.1
+< Host: nist.gov
+< 
+> HTTP/1.1 200 OK
+> Content-Length: 102
+> Content-Type: text/plain
+> 
+> NIST SP800-53 (Rev. 2) Recommended Security Controls for Federal Information Systems and Organizations ]]></artwork>
+            </figure>
+          </section>
         </section>
       </section>
 
@@ -262,20 +280,167 @@
           using symbolic links or web server configuration.</t>
 
           <section title="Examples">
-            <t>This example shows a client retrieving the ISO 3166-1 country
-            code(s) from which the cloud.example.com service is being
-            provided.</t>
+            <section title="Generic">
+              <t>This example shows a client retrieving the ISO 3166-1 country
+              code(s) from which the cloud.example.com service is being
+              provided.</t>
 
-            <figure>
-              <artwork><![CDATA[< GET /.well-known/cloudaudit/service/org/iso/3166-1 HTTP/1.1
-< Host: iso.org
+              <figure>
+                <artwork><![CDATA[< GET /.well-known/cloudaudit/service/org/iso/3166-1 HTTP/1.1
+< Host: cloud.example.com
 < 
 > HTTP/1.1 200 OK
 > Content-Length: 3
 > Content-Type: text/plain
 > 
 > US]]></artwork>
-            </figure>
+              </figure>
+            </section>
+
+            <section title="Compliance - Human Readable Response">
+              <t>This example shows a client retrieving a response to a
+              control section 15.3.1 of ISO 27002 (v2005) from which the
+              cloud.example.com service is being provided. The response is
+              valid HTML and intended to be human readable.</t>
+
+              <figure>
+                <artwork><![CDATA[< GET /.well-known/cloudaudit/service//org/iso/27002/v2005/15/3/1 HTTP/1.1
+< Host: cloud.example.com
+< 
+> HTTP/1.1 200 OK
+> Content-Length: 822
+> Content-Type: text/html
+> 
+> <html>
+> <body>
+> <head>
+> <title>ISO 27002 v2005 15.3.1</title>
+> </head>
+> <H1>Information systems audit controls</H1>
+> <UL>
+> <LI><a href="http://www.cloudhosting.com/.well-known/cloudaudit/org/iso/27002/v2005/15/3/1/auditschedule.xls">Audit Schedule</a> - <i>the 2010 audit schedule for cloud hosting inc.</i>
+> <LI><a href="http://www.cloudhosting.com/.well-known/cloudaudit/org/iso/27002/v2005/15/3/1/contract.pdf">KPWEY LLP Audit Contract</a> - <i>The audit contract with KPWEY for external audit services</i> - <span>The document details the services procured to support the audit plan; see page 14 for specific details.</span>
+> <LI><a href="http://www.cloudhosting.com/.well-known/cloudaudit/org/iso/27002/v2005/15/3/1/auditscope.zip">Audit Scope</a> - <i>The audit scope for the planned audits in 2010</i>
+> </UL>
+> </body>
+> </html>]]></artwork>
+              </figure>
+            </section>
+
+            <section title="Compliance - Atom Response">
+              <t>This example shows a client retrieving a response to a
+              control section 15.3.1 of ISO 27002 (v2005) from which the
+              cloud.example.com service is being provided. The response is in
+              an ATOM format <xref target="RFC4287"></xref> and intended to be
+              machine processed.</t>
+
+              <figure>
+                <artwork><![CDATA[< GET /.well-known/cloudaudit/service//org/iso/27002/v2005/15/3/1/manifest.xml HTTP/1.1
+< Host: cloud.example.com
+< 
+> HTTP/1.1 200 OK
+> Content-Length: 3432
+> Content-Type: text/xml
+> 
+> <?xml version="1.0" encoding="UTF-8"?>
+> <feed xmlns="http://www.w3.org/2005/Atom">
+>    <title>ISO 27002 v2005 15.3.1</title>
+>    <link href="http://www.cloudhosting.com/.well-known/cloudaudit/org/iso/27002/v2005/15/3/1/" rel="self"/>
+>    <id>http://www.cloudhosting.com/.well-known/cloudaudit/org/iso/27002/v2005/15/3/1/</id>
+>    <subtitle>Information systems audit controls</subtitle>
+>    <updated>2010-01-13T18:30:02Z</updated>
+>    <generator uri="http://cloudaudit.org/development/bootstrap.tgz" version="1.0">Cloud Audit Manual Bootstrap Package</generator>
+>    <author>
+>        <name>Jon James</name>
+>        <email>jonjames@cloudhosting.com</email>
+>    </author>
+>    <rights type="text">Copyright (c) 2009, Cloud Hosting Inc.</rights>
+>    <category term="/iso/27002/v2005/" label="ISO 27002 v5"/>
+>    
+>    <entry>
+>        <title>Audit Schedule</title>
+>        <link href="http://www.cloudhosting.com/.well-known/cloudaudit/org/iso/27002/v2005/15/3/1/auditschedule.xls" type="application/msexcel" rel="related"></link>
+>        <id>http://www.cloudhosting.com/.well-known/cloudaudit/org/iso/27002/v2005/15/3/1/auditschedule.xls</id>
+>        <updated>2009-12-28T12:24:02Z</updated>
+>        <summary>the 2010 audit schedule for cloud hosting inc.</summary>
+>        <author>
+>            <name>Eric Smith</name>
+>            <email>ericsmith@cloudhosting.com</email>
+>        </author>
+>        <contributor>
+>            <name>Mary Huxley</name>
+>            <email>maryhuxley@kpwey.com</email>
+>            <uri>http://www.kpwey.com</uri>
+>        </contributor>
+>    </entry>
+>    
+>    <entry>
+>        <title>KPWEY LLP Audit Contract</title>
+>        <link href="http://www.cloudhosting.com/.well-known/cloudaudit/org/iso/27002/v2005/15/3/1/contract.pdf" type="application/pdf" rel="related"></link>
+>        <id>http://www.cloudhosting.com/.well-known/cloudaudit/org/iso/27002/v2005/15/3/1/contract.pdf</id>
+>        <updated>2009-01-12T11:45:02Z</updated>
+>        <summary>The audit contract with KPWEY for external audit services</summary>
+>        <content type="text" xml:lang="en">
+>            The document details the services procured to support the audit plan; see page 14 for specific details.
+>        </content>
+>        <author>
+>            <name>Eric Smith</name>
+>            <email>ericsmith@cloudhosting.com</email>
+>        </author>
+>        <contributor>
+>            <name>Mary Huxley</name>
+>            <email>maryhuxley@kpwey.com</email>
+>            <uri>http://www.kpwey.com</uri>
+>        </contributor>
+>    </entry>
+>    
+>    <entry>
+>        <title>Audit Scope</title>
+>        <link href="http://www.cloudhosting.com/.well-known/cloudaudit/org/iso/27002/v2005/15/3/1/auditscope.zip" type="application/zip" rel="related"></link>
+>        <id>http://www.cloudhosting.com/.well-known/cloudaudit/org/iso/27002/v2005/15/3/1/auditscope.zip</id>
+>        <updated>2009-12-28T12:25:02Z</updated>
+>        <summary>The audit scope for the planned audits in 2010</summary>
+>        <author>
+>            <name>Sarah Chan</name>
+>            <email>sarahchan@cloudhosting.com</email>
+>        </author>
+>        <contributor>
+>            <name>David Kohl</name>
+>            <email>davidkohl@kpwey.com</email>
+>        </contributor>
+>        <contributor>
+>            <name>Mary Huxley</name>
+>            <email>maryhuxley@kpwey.com</email>
+>            <uri>http://www.kpwey.com</uri>
+>        </contributor>
+>    </entry>
+> </feed>
+]]></artwork>
+              </figure>
+            </section>
+
+            <section title="Compliance - Non-Existent">
+              <t>This example shows a client atempting to retrieve a non
+              existent response to a control section of NIST SP800-53 (Rev 2)
+              from which the cloud.example.com service is being provided.</t>
+
+              <figure>
+                <artwork><![CDATA[< GET /.well-known/cloudaudit/glossary/gov/nist/crc/sp800-53/r2/cp-2 HTTP/1.1
+< Host: cloud.example.com
+< 
+> HTTP/1.1 404 Not Found
+> Content-Length: 148
+> Content-Type: text/html
+> 
+> <html>
+> <head>
+> <title>404 Not Found</title>
+> </head><body><h1>Error: Not Found</h1>
+> <h2>The requested URL was not found on this server.</h2>
+> </body>
+> </html>]]></artwork>
+              </figure>
+            </section>
           </section>
         </section>
 
@@ -395,6 +560,8 @@
       <?rfc include="reference.RFC.5246"?>
 
       <?rfc include="reference.W3C.REC-html401-19991224"?>
+
+      <?rfc include="reference.RFC.4287"?>
     </references>
 
     <references title="Informative References"></references>
