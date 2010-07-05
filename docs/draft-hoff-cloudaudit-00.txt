@@ -4,12 +4,12 @@
 Network Working Group                                            C. Hoff
 Internet-Draft                                             Cisco Systems
 Intended status: Experimental                                S. Johnston
-Expires: January 6, 2011                                          Google
+Expires: December 30, 2010                                        Google
                                                                 G. Reese
                                                                enStratus
                                                                B. Sapiro
                                                                    TELUS
-                                                            July 5, 2010
+                                                           June 28, 2010
 
 
  CloudAudit 1.0 - Automated Audit, Assertion, Assessment, and Assurance
@@ -45,16 +45,16 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on January 6, 2011.
+   This Internet-Draft will expire on December 30, 2010.
 
 Copyright Notice
 
 
 
 
-Hoff, et al.             Expires January 6, 2011                [Page 1]
+Hoff, et al.            Expires December 30, 2010               [Page 1]
 
-Internet-Draft                 CloudAudit                      July 2010
+Internet-Draft                 CloudAudit                      June 2010
 
 
    Copyright (c) 2010 IETF Trust and the persons identified as the
@@ -108,9 +108,9 @@ Table of Contents
 
 
 
-Hoff, et al.             Expires January 6, 2011                [Page 2]
+Hoff, et al.            Expires December 30, 2010               [Page 2]
 
-Internet-Draft                 CloudAudit                      July 2010
+Internet-Draft                 CloudAudit                      June 2010
 
 
 1.  Introduction
@@ -164,9 +164,9 @@ Internet-Draft                 CloudAudit                      July 2010
 
 
 
-Hoff, et al.             Expires January 6, 2011                [Page 3]
+Hoff, et al.            Expires December 30, 2010               [Page 3]
 
-Internet-Draft                 CloudAudit                      July 2010
+Internet-Draft                 CloudAudit                      June 2010
 
 
    Additionally, the following rules are included from [RFC3986]: URI.
@@ -220,9 +220,9 @@ Link: <http://example.com/.well-known/cloudaudit/com.example.ec2>; rel="http://c
 
 
 
-Hoff, et al.             Expires January 6, 2011                [Page 4]
+Hoff, et al.            Expires December 30, 2010               [Page 4]
 
-Internet-Draft                 CloudAudit                      July 2010
+Internet-Draft                 CloudAudit                      June 2010
 
 
 5.  Namespaces
@@ -276,9 +276,9 @@ Internet-Draft                 CloudAudit                      July 2010
 
 
 
-Hoff, et al.             Expires January 6, 2011                [Page 5]
+Hoff, et al.            Expires December 30, 2010               [Page 5]
 
-Internet-Draft                 CloudAudit                      July 2010
+Internet-Draft                 CloudAudit                      June 2010
 
 
 < GET /.well-known/cloudaudit/glossary/gov/nist/crc/sp800-53/r2 HTTP/1.1
@@ -332,9 +332,9 @@ Internet-Draft                 CloudAudit                      July 2010
 
 
 
-Hoff, et al.             Expires January 6, 2011                [Page 6]
+Hoff, et al.            Expires December 30, 2010               [Page 6]
 
-Internet-Draft                 CloudAudit                      July 2010
+Internet-Draft                 CloudAudit                      June 2010
 
 
 < GET /.well-known/cloudaudit/service//org/iso/27002/v2005/15/3/1 HTTP/1.1
@@ -388,9 +388,9 @@ Internet-Draft                 CloudAudit                      July 2010
 
 
 
-Hoff, et al.             Expires January 6, 2011                [Page 7]
+Hoff, et al.            Expires December 30, 2010               [Page 7]
 
-Internet-Draft                 CloudAudit                      July 2010
+Internet-Draft                 CloudAudit                      June 2010
 
 
 >
@@ -444,9 +444,9 @@ Internet-Draft                 CloudAudit                      July 2010
 
 
 
-Hoff, et al.             Expires January 6, 2011                [Page 8]
+Hoff, et al.            Expires December 30, 2010               [Page 8]
 
-Internet-Draft                 CloudAudit                      July 2010
+Internet-Draft                 CloudAudit                      June 2010
 
 
 >        <contributor>
@@ -500,9 +500,9 @@ Internet-Draft                 CloudAudit                      July 2010
 
 
 
-Hoff, et al.             Expires January 6, 2011                [Page 9]
+Hoff, et al.            Expires December 30, 2010               [Page 9]
 
-Internet-Draft                 CloudAudit                      July 2010
+Internet-Draft                 CloudAudit                      June 2010
 
 
    the URL.  The name and assertion MUST be delineated with a '/-/' URL
@@ -556,9 +556,9 @@ Internet-Draft                 CloudAudit                      July 2010
 
 
 
-Hoff, et al.             Expires January 6, 2011               [Page 10]
+Hoff, et al.            Expires December 30, 2010              [Page 10]
 
-Internet-Draft                 CloudAudit                      July 2010
+Internet-Draft                 CloudAudit                      June 2010
 
 
    repositories over a public network such as the Internet.
@@ -612,9 +612,9 @@ Internet-Draft                 CloudAudit                      July 2010
 
 
 
-Hoff, et al.             Expires January 6, 2011               [Page 11]
+Hoff, et al.            Expires December 30, 2010              [Page 11]
 
-Internet-Draft                 CloudAudit                      July 2010
+Internet-Draft                 CloudAudit                      June 2010
 
 
    [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
@@ -668,9 +668,9 @@ Appendix A.  Initial Registry Contents
 
 
 
-Hoff, et al.             Expires January 6, 2011               [Page 12]
+Hoff, et al.            Expires December 30, 2010              [Page 12]
 
-Internet-Draft                 CloudAudit                      July 2010
+Internet-Draft                 CloudAudit                      June 2010
 
 
 Authors' Addresses
@@ -724,6 +724,6 @@ Authors' Addresses
 
 
 
-Hoff, et al.             Expires January 6, 2011               [Page 13]
+Hoff, et al.            Expires December 30, 2010              [Page 13]
 
 
