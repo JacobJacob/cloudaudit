@@ -13,7 +13,7 @@
 <rfc category="exp" docName="draft-hoff-cloudaudit-00" ipr="trust200902">
   <front>
     <title abbrev="CloudAudit">CloudAudit 1.0 - Automated Audit, Assertion,
-    Assessment, and Assurance API</title>
+    Assessment, and Assurance API (A6)</title>
 
     <author fullname="Christofer Hoff" initials="C." surname="Hoff">
       <organization>Cisco Systems</organization>
@@ -108,7 +108,7 @@
     <date day="28" month="June" year="2010" />
 
     <abstract>
-      <t>CloudAudit (A6) provides an open, extensible and secure interface
+      <t>CloudAudit provides an open, extensible and secure interface
       that allows cloud computing providers to expose Audit, Assertion,
       Assessment, and Assurance (A6) information for cloud infrastructure
       (IaaS), platform (PaaS), and application (SaaS) services to authorized
@@ -125,18 +125,26 @@
 
   <middle>
     <section title="Introduction">
-      <t>CloudAudit is a HTTP based protocol that allows cloud computing
-      clients to audit metadata relating to security by automated means. The
-      first release is designed to be as simple as possible so as it can be
-      implemented by creating a directory structure and uploading files to a
-      standard web server that implements HTTP <xref target="RFC2616"></xref>.
+      <t>CloudAudit provides a common interface, naming convention, set of processes 
+	  and technologies utilizing the HTTP protocol to enable cloud service providers 
+	  to automate the collection and assertion of operational, security, audit, assessment, 
+	  and assurance information. This provides duly authorized and authenticated consumers 
+	  and brokers of cloud computing services to automate requests for this data and metadata.</t>
+	  
+	  <t>CloudAudit supports the notion of requests for both structured and unstructured data 
+	  and metadata aligned to compliance and audit frameworks. Specific compliance framework
+	  definitions and namespaces ("compliance packs")) will be made available incrementally.</t>
+	  
+      <t>The first CloudAudit release is designed to be as simple as possible so as it can be
+      implemented by creating a consistent namespace and directory structure and placement of
+	  files to a standard web server that implements HTTP <xref target="RFC2616"></xref>.
       Subsequent releases may add the ability to write definitions and
       assertions, and to request new assertions be generated (e.g. a network
       scan). That is, while 1.x versions are read-only, subsequent releases
       may be read-write.</t>
 
-      <t>A client will typically interrogate the service and verify compliance
-      with local policy before making use of it. It may do so by checking
+      <t>A duly authorized and authenticated client will typically interrogate the service 
+	  and verify compliance with local policy before making use of it. It may do so by checking
       certain pre-defined parameters (for example, the geographical location
       of the servers, compliance with prevailing security standards, etc.) or
       it may enumerate some/all of the information available and present it to
