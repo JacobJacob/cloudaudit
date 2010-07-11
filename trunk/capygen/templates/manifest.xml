@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>%CONTROL% - %TITLE%</title>
+  <link href="%URI%/.well-known/cloudaudit/org/csa/guidance/%CONTROL%" rel="self"/>
+  <id>%URI%/.well-known/cloudaudit/org/csa/guidance/%CONTROL%</id>
+  <subtitle>%TITLE%</subtitle>
+  <updated>%TIMESTAMP%</updated>
+  <generator uri="http://cloudaudit.org/development/generator" version="1.0">Cloud Audit Package Generator</generator>
+  <author>
+    <name>%AUTHOR%</name>
+    <email>%EMAIL%</email>
+  </author>
+  <rights type="text">Copyright (c) 2010, %ORGANIZATION%.</rights>
+  <category term="/csa/guidance/" label="CSA Guidance"/>
+  <entry>
+    <id>%CONTROL%:assertion</id>
+    <link href="%URI%/.well-known/cloudaudit/org/csa/guidance/%CONTROL%" />
+    <updated>%TIMESTAMP%</updated>
+    <title>Assertion</title>
+    <summary>%ASSERTION%</summary>
+  </entry>
+</feed>
