@@ -33,12 +33,12 @@ class Archiver(object):
         
     def copyItem(self, directory, controls):
         for control in controls:
-            shutil.copy(self.file, directory + '/.well-known/cloudaudit/org/csa/guidance/' + control + '/' + self.fileName)
+            shutil.copy(self.file, directory + '/.well-known/cloudaudit/org/cloudsecurityalliance/guidance/' + control + '/' + self.fileName)
 
     def updateIndex(self, directory, title, summary, controls):
         for control in controls:
-            id = '/.well-known/cloudaudit/org/csa/guidance/' + control + '/' + self.fileName
-            current = directory + '/.well-known/cloudaudit/org/csa/guidance/' + control
+            id = '/.well-known/cloudaudit/org/cloudsecurityalliance/guidance/' + control + '/' + self.fileName
+            current = directory + '/.well-known/cloudaudit/org/cloudsecurityalliance/guidance/' + control
             xmlFile = open(current + '/index.html', 'r+')
             xmlContent = xml.dom.minidom.parse(xmlFile)
             divs = xmlContent.getElementsByTagName('div')
@@ -78,8 +78,8 @@ class Archiver(object):
                         
     def updateManifest(self, directory, title, summary, controls):
         for control in controls:
-            id = '/.well-known/cloudaudit/org/csa/guidance/' + control + '/' + self.fileName
-            current = directory + '/.well-known/cloudaudit/org/csa/guidance/' + control
+            id = '/.well-known/cloudaudit/org/cloudsecurityalliance/guidance/' + control + '/' + self.fileName
+            current = directory + '/.well-known/cloudaudit/org/cloudsecurityalliance/guidance/' + control
             xmlFile = open(current + '/manifest.xml', 'r+')
             xmlContent = xml.dom.minidom.parse(xmlFile)
             matches = xmlContent.getElementsByTagName('id')
@@ -98,7 +98,7 @@ class Archiver(object):
                     item.appendChild(txt)
                     entry.appendChild(item)
                     item = xmlContent.createElement('link')
-                    item.setAttribute('href', '/.well-known/cloudaudit/org/csa/guidance/' + control + '/' + self.fileName)
+                    item.setAttribute('href', '/.well-known/cloudaudit/org/cloudsecurityalliance/guidance/' + control + '/' + self.fileName)
                     item.setAttribute('rel', 'related')
                     entry.appendChild(item)
                     item = xmlContent.createElement('id')
@@ -131,9 +131,9 @@ class Builder(object):
         os.mkdir(base + '.well-known')
         os.mkdir(base + '.well-known/cloudaudit')
         os.mkdir(base + '.well-known/cloudaudit/org')
-        os.mkdir(base + '.well-known/cloudaudit/org/csa')
-        os.mkdir(base + '.well-known/cloudaudit/org/csa/guidance')
-        self.target = base + '.well-known/cloudaudit/org/csa/guidance'
+        os.mkdir(base + '.well-known/cloudaudit/org/cloudsecurityalliance')
+        os.mkdir(base + '.well-known/cloudaudit/org/cloudsecurityalliance/guidance')
+        self.target = base + '.well-known/cloudaudit/org/cloudsecurityalliance/guidance'
         self.atomTemplate = atomTemplate
         self.htmlTemplate = htmlTemplate
         self.definitions = definitions
